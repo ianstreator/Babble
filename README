@@ -2,11 +2,8 @@
 
 This is a simple web-socket text based chatting app, with a main feature of translation.
 
----- HOW IT WORKS (user-(ADMIN / GUEST)) ----
+users will select their ( role, language, name ) in the app and be connected to a web-socket if validated, and be enetered into a chat room.
 
 The host/admin title is only for the use of creating a room and setting the room variables, there is no "in room" benefits or controls for hosts/admins. 
 Once you are in the room all users are equal.
 
----- HOW IT WORKS (developer) ----
-
-users will select their ( role, language, name ) in the app and be connected to a web-socket if validated, and be enetered into a chat room.
