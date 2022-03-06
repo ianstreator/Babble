@@ -1,0 +1,46 @@
+.btn {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  margin: 5rem;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  width: 10rem;
+}
+
+.Role-form {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 5rem;
+  min-width: 20rem;
+}
+
+.Role-form .Host {
+  background-color: #4d7780;
+  color: white;
+}
+
+.Role-form .Host:hover {
+  background-color: #60959f;
+}
+
+.Role-form .Guest {
+  background-color: #389485;
+  color: white;
+}
+
+.Role-form .Guest:hover {
+  background-color: #46b9a6;
+}
+/*# sourceMappingURL=Role-selection.css.map */
