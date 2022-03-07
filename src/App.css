@@ -28,4 +28,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.Role-select .header {
+  font-size: 3rem;
+  margin: 1rem;
+}
 /*# sourceMappingURL=App.css.map */

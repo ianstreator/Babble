@@ -12,7 +12,7 @@ function App() {
           path="/*"
           element={
             <div className="Role-select">
-              <h1>Chatter</h1>
+              <img src="../src/images/Chatter-Logo.svg" width={250}/>
               <RoleSelection />
             </div>
           }
