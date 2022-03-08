@@ -1,4 +1,23 @@
-.btn {
+.Role-form {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5rem;
+  min-width: 20rem;
+  margin: 2rem;
+}
+
+.Role-form .btn {
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -11,37 +30,21 @@
   width: 10rem;
 }
 
-.Role-form {
-  background-color: rgba(0, 0, 0, 0.25);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  padding: 5rem;
-  min-width: 20rem;
-  margin: 2rem;
-}
-
-.Role-form .Host {
-  background-color: #4d7780;
+.Role-form .btn.Host {
+  background-color: #3d818f;
   color: white;
 }
 
-.Role-form .Host:hover {
-  background-color: #60959f;
+.Role-form .btn.Host:hover {
+  background-color: #4da2b3;
 }
 
-.Role-form .Guest {
-  background-color: #389485;
+.Role-form .btn.Guest {
+  background-color: #3d8f66;
   color: white;
 }
 
-.Role-form .Guest:hover {
-  background-color: #46b9a6;
+.Role-form .btn.Guest:hover {
+  background-color: #4db380;
 }
 /*# sourceMappingURL=Role-selection.css.map */

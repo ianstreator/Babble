@@ -1,31 +1,35 @@
-import "./Role-selection.css"
+import "./Role-selection.css";
 
-import Form from "../shared/Form";
 import Button from "../shared/Button";
-
+import { useNavigate } from "react-router-dom";
 
 function RoleSelection() {
+  let navigate = useNavigate();
+
+  function displayGuest() {
+    navigate("/Guest");
+  }
+  function displayHost() {
+    navigate("/Host");
+  }
+
   return (
-    <Form
-      className={"Role-form"}
-      children={
-        <>
-          <Button className={"btn Host"} type={"button"} children={<h1>Host</h1>} />
-          <Button className={"btn Guest"} type={"button"} children={<h1>Guest</h1>} />
-        </>
-      }
-    />
+    <div className="Role-form">
+      <Button
+        className={"btn Host"}
+        type={"button"}
+        children={<h1>Host</h1>}
+        onClick={displayHost}
+      />
+
+      <Button
+        className={"btn Guest"}
+        type={"button"}
+        children={<h1>Guest</h1>}
+        onClick={displayGuest}
+      />
+    </div>
   );
 }
-const styles = {
-  formStyle: {
-    backgroundColor: "rgba(0,0,0,0.5)",
-    padding: "10rem",
-    width: "20rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-  },
-};
 
 export default RoleSelection;
