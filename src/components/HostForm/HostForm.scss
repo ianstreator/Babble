@@ -1,0 +1,67 @@
+.Host-form {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 5rem;
+  margin: 2rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 20rem;
+  input[type="range"] {
+    width: 90%;
+  }
+  select {
+    width: 90%;
+    border: none;
+    background-color: rgba(71, 71, 71, 0.5);
+    padding: 1rem;
+    margin: 1rem;
+    outline: none;
+    color: rgb(255, 255, 255);
+    .place-holder {
+      color: grey;
+    }
+    & option {
+      background-color: rgb(71, 71, 71);
+      padding: 1rem;
+    }
+  }
+  .input {
+    border: none;
+    outline: none;
+    background-color: rgba(71, 71, 71, 0.5);
+    color: white;
+    margin: 1rem;
+    padding: 1rem;
+    width: 80%;
+  }
+  .btn-container {
+    display: flex;
+    flex-direction: row;
+    .btn {
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 200ms;
+      margin: 1rem;
+      min-width: fit-content;
+      width: 8rem;
+      &.back {
+        background-color: hsl(0, 40%, 40%);
+        color: white;
+        &:hover {
+          background-color: hsl(0, 40%, 50%);
+        }
+      }
+
+      &.join {
+        background-color: hsl(110, 40%, 40%);
+        color: white;
+        &:hover {
+          background-color: hsl(110, 40%, 50%);
+        }
+      }
+    }
+  }
+}

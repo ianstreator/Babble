@@ -12,22 +12,22 @@
     border-radius: 5px;
     cursor: pointer;
     transition: 200ms;
-    margin: 5rem;
+    margin: 2.5rem;
     min-width: fit-content;
     width: 10rem;
-    &.Host {
-      background-color: hsl(190, 40%, 40%);
+    &.host {
+      background-color: hsl(170, 50%, 40%);
       color: white;
       &:hover {
-        background-color: hsl(190, 40%, 50%);
+        background-color: hsl(170, 50%, 50%);
       }
     }
 
-    &.Guest {
-      background-color: hsl(150, 40%, 40%);
+    &.guest {
+      background-color: hsl(29, 50%, 40%);
       color: white;
       &:hover {
-        background-color: hsl(150, 40%, 50%);
+        background-color: hsl(29, 50%, 50%);
       }
     }
   }

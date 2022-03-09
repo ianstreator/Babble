@@ -1,15 +1,31 @@
-import "./Guest.css";
-import "./Guest.css";
+import "./GuestForm.css";
 
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
 
 function Guest() {
+  const [username, setUsername] = useState("");
+  const [roomID, setRoomID] = useState(null);
+  const [language, setLanguage] = useState(null);
+
   let navigate = useNavigate();
+
   const navBack = () => {
     navigate("/");
+  };
+
+  const navJoin = () => {
+    if (username === "" || roomID === "" || language === null) {
+      toast("Please fill out all fields :)")
+      return null;
+    }
+
+    navigate("/Room#124ssdff43");
   };
 
   return (
@@ -19,8 +35,16 @@ function Guest() {
         children={
           <>
             <Input placeholder={"Username"} className={"input"} />
-            <Input placeholder={"Language"} className={"input"} />
             <Input placeholder={"RoomID"} className={"input"} />
+
+            <select>
+              <option value={null} className="place-holder">
+                Please choose a language
+              </option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>German</option>
+            </select>
             <div className="btn-container">
               <Button
                 type={"button"}
@@ -32,6 +56,7 @@ function Guest() {
                 type={"button"}
                 children={<h1>Join</h1>}
                 className={"btn join"}
+                onClick={navJoin}
               />
             </div>
           </>

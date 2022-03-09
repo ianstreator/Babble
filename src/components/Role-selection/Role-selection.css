@@ -23,28 +23,28 @@
   cursor: pointer;
   -webkit-transition: 200ms;
   transition: 200ms;
-  margin: 5rem;
+  margin: 2.5rem;
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
   width: 10rem;
 }
 
-.Role-form .btn.Host {
-  background-color: #3d818f;
+.Role-form .btn.host {
+  background-color: #339988;
   color: white;
 }
 
-.Role-form .btn.Host:hover {
-  background-color: #4da2b3;
+.Role-form .btn.host:hover {
+  background-color: #40bfaa;
 }
 
-.Role-form .btn.Guest {
-  background-color: #3d8f66;
+.Role-form .btn.guest {
+  background-color: #996433;
   color: white;
 }
 
-.Role-form .btn.Guest:hover {
-  background-color: #4db380;
+.Role-form .btn.guest:hover {
+  background-color: #bf7d40;
 }
 /*# sourceMappingURL=Role-selection.css.map */

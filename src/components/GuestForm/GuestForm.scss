@@ -8,9 +8,27 @@
   justify-content: center;
   align-items: center;
   max-width: 20rem;
+  select {
+    width: 90%;
+    border: none;
+    background-color: rgba(71, 71, 71, 0.5);
+    padding: 1rem;
+    margin: 1rem;
+    outline: none;
+    color: rgb(255, 255, 255);
+    .place-holder {
+        color: grey;
+    }
+    & option {
+        background-color: rgb(71, 71, 71);
+        padding: 1rem;
+    }
+  }
   .input {
     border: none;
     outline: none;
+    background-color: rgba(71, 71, 71, 0.5);
+    color: white;
     margin: 1rem;
     padding: 1rem;
     width: 80%;
@@ -25,7 +43,7 @@
       transition: 200ms;
       margin: 1rem;
       min-width: fit-content;
-      width: 10rem;
+      width: 8rem;
       &.back {
         background-color: hsl(0, 40%, 40%);
         color: white;

@@ -1,0 +1,92 @@
+.Guest-form {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 5rem;
+  margin: 2rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 20rem;
+}
+
+.Guest-form select {
+  width: 90%;
+  border: none;
+  background-color: rgba(71, 71, 71, 0.5);
+  padding: 1rem;
+  margin: 1rem;
+  outline: none;
+  color: white;
+}
+
+.Guest-form select .place-holder {
+  color: grey;
+}
+
+.Guest-form select option {
+  background-color: #474747;
+  padding: 1rem;
+}
+
+.Guest-form .input {
+  border: none;
+  outline: none;
+  background-color: rgba(71, 71, 71, 0.5);
+  color: white;
+  margin: 1rem;
+  padding: 1rem;
+  width: 80%;
+}
+
+.Guest-form .btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.Guest-form .btn-container .btn {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  margin: 1rem;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  width: 8rem;
+}
+
+.Guest-form .btn-container .btn.back {
+  background-color: #8f3d3d;
+  color: white;
+}
+
+.Guest-form .btn-container .btn.back:hover {
+  background-color: #b34d4d;
+}
+
+.Guest-form .btn-container .btn.join {
+  background-color: #4b8f3d;
+  color: white;
+}
+
+.Guest-form .btn-container .btn.join:hover {
+  background-color: #5eb34d;
+}
+/*# sourceMappingURL=GuestForm.css.map */

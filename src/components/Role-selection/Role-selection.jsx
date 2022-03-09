@@ -7,23 +7,23 @@ function RoleSelection() {
   let navigate = useNavigate();
 
   function displayGuest() {
-    navigate("/Guest");
+    navigate("/GuestForm");
   }
   function displayHost() {
-    navigate("/Host");
+    navigate("/HostForm");
   }
 
   return (
     <div className="Role-form">
       <Button
-        className={"btn Host"}
+        className={"btn host"}
         type={"button"}
         children={<h1>Host</h1>}
         onClick={displayHost}
       />
 
       <Button
-        className={"btn Guest"}
+        className={"btn guest"}
         type={"button"}
         children={<h1>Guest</h1>}
         onClick={displayGuest}
