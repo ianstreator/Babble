@@ -2,7 +2,7 @@ import "./ChatRoom.css";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 import Input from "../shared/Input";
 import Button from "../shared/Button";
@@ -11,8 +11,8 @@ function ChatRoom() {
   const [message, setMessage] = useState("");
 
   const sendMessage = () => {
-    if (message === "") return toast("Failed to send message..");
-    toast("Message Sent!")
+    // if (message === "") return toast("Failed to send message..");
+    // toast("Message Sent!")
     setMessage("")
   };
 

@@ -5,7 +5,7 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 function Guest() {
   const [username, setUsername] = useState("");
@@ -20,7 +20,8 @@ function Guest() {
 
   const navJoin = () => {
     if (username === "" || roomID === "" || language === null) {
-      toast("Please fill out all fields :)");
+      // toast("Please fill out all fields :)");
+      alert("please fill out all fields")
       return null;
     }
 
