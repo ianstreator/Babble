@@ -23,7 +23,7 @@ function HostForm() {
       toast("Please fill out all fields :)");
       return null;
     }
-    navigate(`/ChatRoom?Host=${username}&Language=${language}`);
+    navigate(`/ChatRoom?Host=${username}&Language=${language}&Capacity=${capacity}`);
   };
 
   return (

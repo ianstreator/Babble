@@ -48,6 +48,7 @@ function App() {
           element={
             <div className="form">
               <img src="../src/images/Chatter-Logo.svg" width={250} />
+              <Toast />
               <ChatRoom />
             </div>
           }

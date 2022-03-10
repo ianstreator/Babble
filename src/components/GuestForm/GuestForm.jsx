@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-
 function Guest() {
   const [username, setUsername] = useState("");
   const [roomID, setRoomID] = useState(null);
@@ -21,11 +20,11 @@ function Guest() {
 
   const navJoin = () => {
     if (username === "" || roomID === "" || language === null) {
-      toast("Please fill out all fields :)")
+      toast("Please fill out all fields :)");
       return null;
     }
 
-    navigate("/Room#124ssdff43");
+    navigate(`/ChatRoom?${roomID}`);
   };
 
   return (
@@ -34,10 +33,18 @@ function Guest() {
         className={"Guest-form"}
         children={
           <>
-            <Input placeholder={"Username"} className={"input"} />
-            <Input placeholder={"RoomID"} className={"input"} />
+            <Input
+              placeholder={"Username"}
+              className={"input"}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              placeholder={"RoomID"}
+              className={"input"}
+              onChange={(e) => setRoomID(e.target.value)}
+            />
 
-            <select>
+            <select onChange={(e) => setLanguage(e.target.value)}>
               <option value={null} className="place-holder">
                 Please choose a language
               </option>
