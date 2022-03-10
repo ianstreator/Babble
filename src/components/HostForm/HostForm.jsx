@@ -23,7 +23,9 @@ function HostForm() {
       toast("Please fill out all fields :)");
       return null;
     }
-    navigate(`/ChatRoom?Host=${username}&Language=${language}&Capacity=${capacity}`);
+    navigate(
+      `/ChatRoom?Host=${username}&Language=${language}&Capacity=${capacity}`
+    );
   };
 
   return (
@@ -45,8 +47,17 @@ function HostForm() {
               <option value={"French"}>French</option>
               <option value={"German"}>German</option>
             </select>
-            <input className="capacity" type={"range"} min={2} max={6} value={capacity} onChange={(e) => setCapacity(e.target.value)}/>
-
+            <div className="capacity-container">
+              <p>Capacity: {capacity}</p>
+              <input
+                className="capacity"
+                type={"range"}
+                min={2}
+                max={6}
+                value={capacity}
+                onChange={(e) => setCapacity(e.target.value)}
+              />
+            </div>
 
             <div className="btn-container">
               <Button

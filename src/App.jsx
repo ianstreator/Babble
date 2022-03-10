@@ -1,13 +1,13 @@
 import "./App.css";
+import Logo from "./images/export";
 
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-
-import Toast from "./components/shared/Toast"
+import { Route, Routes, BrowserRouter as Router, Link } from "react-router-dom";
 
 import RoleSelection from "./components/Role-selection/Role-selection";
 import GuestForm from "./components/GuestForm/GuestForm";
 import HostForm from "./components/HostForm/HostForm";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
+import Toast from "./components/shared/Toast";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           path="/"
           element={
             <div className="form">
-              <img src="../src/images/Chatter-Logo.svg" width={250} />
+              <img src={Logo.Logo} width={250} />
               <RoleSelection />
             </div>
           }
@@ -27,7 +27,7 @@ function App() {
           path="/GuestForm"
           element={
             <div className="form">
-              <img src="../src/images/Chatter-Logo.svg" width={250} />
+              <img src={Logo.Logo} width={250} />
               <Toast />
               <GuestForm />
             </div>
@@ -37,7 +37,7 @@ function App() {
           path="/HostForm"
           element={
             <div className="form">
-              <img src="../src/images/Chatter-Logo.svg" width={250} />
+              <img src={Logo.Logo} width={250} />
               <Toast />
               <HostForm />
             </div>
@@ -47,7 +47,9 @@ function App() {
           path="/ChatRoom"
           element={
             <div className="form">
-              <img src="../src/images/Chatter-Logo.svg" width={250} />
+              <Link to={"/"}>
+                <img src={Logo.Logo} width={250} />
+              </Link>
               <Toast />
               <ChatRoom />
             </div>

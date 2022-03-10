@@ -20,8 +20,21 @@
   max-width: 20rem;
 }
 
-.Host-form input[type="range"] {
+.Host-form .capacity-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 90%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.Host-form .capacity-container p {
+  width: 30%;
+}
+
+.Host-form .capacity-container input[type="range"] {
+  width: 50%;
 }
 
 .Host-form select {

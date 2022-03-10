@@ -8,9 +8,18 @@
   justify-content: center;
   align-items: center;
   max-width: 20rem;
-  input[type="range"] {
+  .capacity-container {
+    display: flex;
     width: 90%;
+    justify-content: space-around;
+    p {
+      width: 30%;
+    }
+    input[type="range"] {
+      width: 50%;
+    }
   }
+
   select {
     width: 90%;
     border: none;
