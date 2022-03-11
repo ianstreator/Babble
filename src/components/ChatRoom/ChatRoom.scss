@@ -43,11 +43,6 @@
       margin: 1rem;
       cursor: pointer;
       transition: 200ms;
-      // &:active,
-      // &:hover {
-      //   background-color: #5d86f0;
-      //   color: white;
-      // }
     }
   }
 }
@@ -57,9 +52,12 @@
   background-color: hsl(29, 50%, 40%);
   padding: 1rem;
   margin: .5rem;
-  border-radius: 8px;
+  border-radius: 5px;
   width: fit-content;
   max-width: 60%;
   word-wrap: break-word;
   font-size: 20px;
+  box-shadow: 0px 4px 2px -.5px rgb(34, 34, 34);
+  transition: 1s;
+  left: 0;
 }
