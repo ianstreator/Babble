@@ -1,8 +1,9 @@
 html {
-  font-size: 16px;
   height: 100vh;
   max-height: 100vh;
   height: -webkit-fill-available;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -18,13 +19,10 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+}
+
+#root {
+  width: 100%;
 }
 
 .form {
