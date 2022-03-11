@@ -19,7 +19,7 @@ function HostForm() {
   };
 
   const navCreate = () => {
-    if (username === "" || language === null) {
+    if (username === "" || language === "Please choose a language") {
       // toast("Please fill out all fields :)");
       alert("please fill out all fields")
       return null;

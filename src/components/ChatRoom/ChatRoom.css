@@ -21,6 +21,19 @@
   background-color: #343434;
   height: 100%;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.chat-room-container .message-container::-webkit-scrollbar {
+  display: none;
 }
 
 .chat-room-container .message-input-container {
@@ -40,28 +53,34 @@
   border: none;
   outline: none;
   text-indent: 0.5rem;
-  border-radius: 50px;
+  border-radius: 5px;
   width: 70%;
   margin: 1rem;
-  -webkit-box-shadow: -3px -3px 10px 0px #343434, 3px 3px 5px 0px #0000008f, 3px 3px 5px -1px #000000 inset;
-          box-shadow: -3px -3px 10px 0px #343434, 3px 3px 5px 0px #0000008f, 3px 3px 5px -1px #000000 inset;
 }
 
 .chat-room-container .message-input-container .button-input {
-  background-color: #404040;
-  color: white;
+  background-color: #303030;
+  color: darkgray;
   border: none;
   outline: none;
-  border-radius: 50px;
+  border-radius: 5px;
   width: 25%;
   margin: 1rem;
   cursor: pointer;
-  -webkit-transition: 300ms;
-  transition: 300ms;
+  -webkit-transition: 200ms;
+  transition: 200ms;
 }
 
-.chat-room-container .message-input-container .button-input:hover {
-  background-color: #5d86f0;
-  color: white;
+.message-bubble {
+  background-color: #996433;
+  padding: 1rem;
+  margin: .5rem;
+  border-radius: 8px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 60%;
+  word-wrap: break-word;
+  font-size: 20px;
 }
 /*# sourceMappingURL=ChatRoom.css.map */

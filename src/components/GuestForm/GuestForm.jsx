@@ -19,7 +19,7 @@ function Guest() {
   };
 
   const navJoin = () => {
-    if (username === "" || roomID === "" || language === null) {
+    if (username === "" || roomID === "" || language === "Please choose a language") {
       // toast("Please fill out all fields :)");
       alert("please fill out all fields")
       return null;
@@ -46,7 +46,7 @@ function Guest() {
             />
 
             <select onChange={(e) => setLanguage(e.target.value)}>
-              <option value={null} className="place-holder">
+              <option className="place-holder">
                 Please choose a language
               </option>
               <option>Spanish</option>
