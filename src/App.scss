@@ -16,14 +16,27 @@ body {
 }
 #root {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 60%;
+  min-width: 30rem;
+  height: 100vh;
 }
 
+@media screen and (max-width: 600px) {
+  #root {
+    width: 100%;
+  }
 
+  .form {
+    width: 100%;
+    min-width: 15rem;
+  }
+}
