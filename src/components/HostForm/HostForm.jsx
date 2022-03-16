@@ -1,18 +1,28 @@
 import "./HostForm.css";
 
+import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import SocketContext from "../../Context/SocketContext";
+
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 // import { toast } from "react-toastify";
+
+// async function socketInitHost(username, language, capacity) {
+//   socket = io(undefined, {
+//     query: { username, language, capacity },
+//   });
+//   socket.emit("message-send", "Host");
+//   socket.on("server-reply", data => console.log(data))
+// }
 
 function HostForm() {
   let navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [language, setLanguage] = useState(null);
   const [capacity, setCapacity] = useState(2);
+  const { hostSocket, socket } = useContext(SocketContext);
 
   const navBack = () => {
     navigate("/");
@@ -21,9 +31,10 @@ function HostForm() {
   const navCreate = () => {
     if (username === "" || language === "Please choose a language") {
       // toast("Please fill out all fields :)");
-      alert("please fill out all fields")
+      alert("please fill out all fields");
       return null;
     }
+    hostSocket(username, language, capacity);
     navigate(
       `/ChatRoom?Host=${username}&Language=${language}&Capacity=${capacity}`
     );

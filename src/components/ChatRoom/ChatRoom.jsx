@@ -1,7 +1,9 @@
 import "./ChatRoom.css";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import SocketContext from "../../Context/SocketContext";
+
+// import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 import Input from "../shared/Input";
@@ -11,26 +13,35 @@ import Card from "../shared/Card";
 function ChatRoom() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-
-  const sendMessage = () => {
-    if (message === "") return;
-    const newMessage = (
-      <Card
-        className={"message-bubble"}
-        children={message}
-        key={messages.length + 1}
-      />
-    );
-
-    setMessages([...messages, newMessage]);
-    setMessage("");
-  };
+  const { socket } = useContext(SocketContext);
 
   const sendStyle = {
     backgroundColor: "#5D86F0",
     color: "white",
   };
 
+  useEffect(() => {
+    socket.on("reciever", (data) => {
+      const [socketMessage, id] = data;
+      const style = id === socket.id ? "send" : "recieve";
+      const newMessage = (
+        <Card
+          className={`message-bubble-${style}`}
+          children={socketMessage}
+          key={messages.length + 1}
+        />
+      );
+      console.log("hello");
+      console.log(messages);
+      setMessages([...messages, newMessage]);
+      console.log(messages);
+    });
+  }, []);
+  const sendMessage = () => {
+    if (message === "") return;
+    socket.emit("sender", message);
+    setMessage("");
+  };
   return (
     <div className="chat-room-container">
       <div className="message-container" id="poop">

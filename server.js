@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const { Socket } = require("socket.io");
 
 const app = express();
 
@@ -16,6 +17,17 @@ const server = app.listen(
 
 const io = require("socket.io")(server, { cors: { origin: "*" } });
 
+class Room {
+  constructor(host, capacity, guests, languages) {}
+}
+const rooms = {};
 io.on("connection", (socket) => {
-  console.log("new user", socket);
+  console.log("new user", socket.id);
+  socket.on("message-send", (data) => {
+    console.log(data);
+  });
+  socket.on("sender", (data) => {
+    console.log(data, socket.id);
+    io.emit("reciever", [data, socket.id]);
+  });
 });

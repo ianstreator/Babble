@@ -3,12 +3,14 @@
   width: 100%;
   display: flex;
   height: 100%;
+  max-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .message-container {
     background-color: #343434;
     height: 100%;
+    max-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -48,10 +50,24 @@
 }
 
 
-.message-bubble {
+.message-bubble-send {
   background-color: hsl(170, 50%, 40%);
   padding: 1rem;
   margin: .5rem;
+  border-radius: 5px;
+  width: fit-content;
+  max-width: 60%;
+  word-wrap: break-word;
+  font-size: 20px;
+  box-shadow: 0px 4px 2px -.5px rgb(34, 34, 34);
+  transition: 1s;
+  left: 0;
+}
+.message-bubble-recieve {
+  background-color: hsl(29, 50%, 40%);
+  padding: 1rem;
+  margin: .5rem;
+  margin-left: auto;
   border-radius: 5px;
   width: fit-content;
   max-width: 60%;
