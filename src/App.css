@@ -59,7 +59,7 @@ body {
   }
   .form {
     width: 100%;
-    min-width: 15rem;
+    max-width: 100vw;
   }
 }
 /*# sourceMappingURL=App.css.map */

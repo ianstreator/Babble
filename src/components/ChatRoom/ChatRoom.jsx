@@ -2,8 +2,6 @@ import "./ChatRoom.css";
 
 import { useState, useContext, useEffect, useRef } from "react";
 import SocketContext from "../../Context/SocketContext";
-
-// import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 import Input from "../shared/Input";
@@ -26,15 +24,6 @@ function ChatRoom() {
     socket.emit("sender", message);
     setMessage("");
   };
-
-  // useEffect(() => {
-  //   if (messages.length > 5) {
-  //     const newMessagesArray = messages.filter((m, i) => {
-  //       i > 0;
-  //     });
-  //     setMessages([...newMessagesArray]);
-  //   }
-  // }, [messages]);
 
   useEffect(() => {
     socket.on("reciever", (data) => {
