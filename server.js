@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const { Socket } = require("socket.io");
 
 const app = express();
 
