@@ -1,4 +1,4 @@
-function Input({ placeholder, className, onChange, value, maxLength, type }) {
+function Input({ placeholder, className, onChange, value, maxLength, type, onKeyPress }) {
   return (
     <input
       placeholder={placeholder}
@@ -7,6 +7,7 @@ function Input({ placeholder, className, onChange, value, maxLength, type }) {
       value={value}
       maxLength={maxLength}
       type={type}
+      onKeyPress={onKeyPress}
     ></input>
   );
 }

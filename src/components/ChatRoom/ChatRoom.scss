@@ -2,8 +2,7 @@
   background-color: #222222;
   width: 100%;
   display: flex;
-  height: 100%;
-  max-height: 100vh;
+  height: 80%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -51,9 +50,10 @@
 
 
 .message-bubble-send {
-  background-color: hsl(170, 50%, 40%);
+  background-color: hsla(170, 50%, 40%, 0.5);
   padding: 1rem;
   margin: .5rem;
+  margin-left: auto;
   border-radius: 5px;
   width: fit-content;
   max-width: 60%;
@@ -61,13 +61,13 @@
   font-size: 20px;
   box-shadow: 0px 4px 2px -.5px rgb(34, 34, 34);
   transition: 1s;
-  left: 0;
+  right: 0;
 }
 .message-bubble-recieve {
-  background-color: hsl(29, 50%, 40%);
+  background-color: hsla(29, 50%, 40%, 0.5);
   padding: 1rem;
   margin: .5rem;
-  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
   width: fit-content;
   max-width: 60%;

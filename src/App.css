@@ -20,6 +20,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   overflow-x: hidden;
+  max-height: 100vh;
 }
 
 #root {
