@@ -1,7 +1,10 @@
 const express = require("express");
+const http = require("http");
 const path = require("path");
+const socketio = require("socket.io");
 
 const app = express();
+const server = http.createServer(app);
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 app.get("/", (req, res) => {
@@ -9,12 +12,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
-const server = app.listen(
-  PORT,
-  console.log(`server listening on port:${PORT}`)
-);
+server.listen(PORT, console.log(`server listening on port:${PORT}`));
 
-const io = require("socket.io")(server);
+const io = socketio(server);
 
 class Room {
   constructor(host, capacity, guests, languages) {}
