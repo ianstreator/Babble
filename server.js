@@ -14,7 +14,7 @@ const server = app.listen(
   console.log(`server listening on port:${PORT}`)
 );
 
-const io = require("socket.io")(server, { cors: { origin: "*" } });
+const io = require("socket.io")(server);
 
 class Room {
   constructor(host, capacity, guests, languages) {}
