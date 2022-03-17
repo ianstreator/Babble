@@ -22,7 +22,7 @@ function HostForm() {
   const [username, setUsername] = useState("");
   const [language, setLanguage] = useState(null);
   const [capacity, setCapacity] = useState(2);
-  const { hostSocket, socket } = useContext(SocketContext);
+  const { hostSocket } = useContext(SocketContext);
 
   const navBack = () => {
     navigate("/");
@@ -35,9 +35,7 @@ function HostForm() {
       return null;
     }
     hostSocket(username, language, capacity);
-    navigate(
-      `/ChatRoom?Host=${username}&Language=${language}&Capacity=${capacity}`
-    );
+    navigate(`/ChatRoom`);
   };
 
   return (
