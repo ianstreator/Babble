@@ -10,13 +10,13 @@ export const SocketProvider = ({ children }) => {
     // const host = io(undefined, {
     //   query: { username, language, capacity },
     // });
-    setSocket(io);
+    setSocket(io());
   };
   const guestSocket = (username, roomID, language) => {
     // const guest = io(undefined, {
     //   query: { username, roomID, language },
     // });
-    setSocket(io);
+    setSocket(io());
   };
 
   return (
