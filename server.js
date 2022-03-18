@@ -13,18 +13,11 @@ routes.forEach((route) => {
     res.sendFile(path.join(__dirname, "dist", "index.html"));
   });
 });
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "dist", "index.html"));
-// });
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, console.log(`server listening on port:${PORT}`));
 
-// const io = socketio(server);
-const io = socketio(server, {
-  allowEIO4: true,
-  cors: {credentials: true, origin: 'http://localhost:3000'},
-});
+const io = socketio(server);
 
 class Room {
   constructor(host, capacity, guests, languages) {}
