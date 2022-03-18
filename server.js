@@ -20,7 +20,7 @@ routes.forEach((route) => {
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, console.log(`server listening on port:${PORT}`));
 
-const io = socketio(server);
+const io = socketio(server, { cors: { origin: '*' } });
 
 class Room {
   constructor(host, capacity, guests, languages) {}
