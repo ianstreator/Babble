@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(),],
   resolve: {
     alias: {
-      "xmlhttprequest-ssl": "./node_modules/engine.io/lib/xmlhttprequest.js"
+      "xmlhttprequest-ssl": "./node_modules/engine.io-client/lib/xmlhttprequest.js"
     },
   },
 })
