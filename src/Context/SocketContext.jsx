@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { io } from "https://cdn.socket.io/4.3.0/socket.io.esm.min.js";
+// import { io } from "https://cdn.socket.io/4.3.0/socket.io.esm.min.js";
 
 const SocketContext = createContext();
 
@@ -10,13 +10,13 @@ export const SocketProvider = ({ children }) => {
     // const host = io(undefined, {
     //   query: { username, language, capacity },
     // });
-    setSocket(io());
+    // setSocket(io());
   };
   const guestSocket = (username, roomID, language) => {
     // const guest = io(undefined, {
     //   query: { username, roomID, language },
     // });
-    setSocket(io());
+    // setSocket(io());
   };
 
   return (
