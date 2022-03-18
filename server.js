@@ -31,8 +31,12 @@ io.on("connection", (socket) => {
   socket.on("message-send", (data) => {
     console.log(data);
   });
+  const messageSpam = [];
+
   socket.on("sender", (data) => {
     console.log(data, socket.id);
-    io.emit("reciever", [data, socket.id]);
+    if (!messageSpam) {
+      io.emit("reciever", [data, socket.id]);
+    }
   });
 });
