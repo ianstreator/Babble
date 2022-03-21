@@ -1,14 +1,9 @@
 const express = require("express");
-const cors = require("cors");
+const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 const path = require("path");
 const routes = require("./router.js");
-
-const app = express();
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 routes.forEach((route) => {
@@ -18,12 +13,9 @@ routes.forEach((route) => {
 });
 
 const PORT = process.env.PORT || 4000;
-const server = app.listen(
-  PORT,
-  console.log(`server listening on port:${PORT}`)
-);
-
-const io = require("socket.io")(server, { cors: { origin: "*" } });
+http.listen(PORT, () => {
+  console.log(`server listening on port:${PORT}`);
+});
 
 class Room {
   constructor(host, capacity, guests, languages) {}
