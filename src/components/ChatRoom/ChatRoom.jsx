@@ -24,7 +24,7 @@ function ChatRoom() {
     socket.emit("sender", message);
     setMessage("");
   };
-
+  
   useEffect(() => {
     socket.on("reciever", (data) => {
       console.log(messagesRef);

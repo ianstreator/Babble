@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import { io } from "https://cdn.socket.io/4.3.0/socket.io.esm.min.js";
+// import { io } from "https://cdn.socket.io/4.3.0/socket.io.esm.min.js";
+import { io } from "socket.io-client";
 
 const SocketContext = createContext();
 

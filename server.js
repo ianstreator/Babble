@@ -23,17 +23,14 @@ class Room {
   constructor(host, capacity, guests, languages) {}
 }
 const rooms = {};
+
 io.on("connection", (socket) => {
   console.log("new user", socket.id);
   socket.on("message-send", (data) => {
     console.log(data);
   });
-  const messageSpam = [];
-
   socket.on("sender", (data) => {
     console.log(data, socket.id);
-    // if (!messageSpam) {
       io.emit("reciever", [data, socket.id]);
-    // }
   });
 });
