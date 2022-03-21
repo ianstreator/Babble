@@ -8,16 +8,16 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   const hostSocket = (username, language, capacity) => {
-    const host = io(undefined, {
-      query: { username, language, capacity },
-    });
-    setSocket(host);
+    // const host = io(undefined, {
+    //   query: { username, language, capacity },
+    // });
+    setSocket(io());
   };
   const guestSocket = (username, roomID, language) => {
-    const guest = io(undefined, {
-      query: { username, roomID, language },
-    });
-    setSocket(guest);
+    // const guest = io(undefined, {
+    //   query: { username, roomID, language },
+    // });
+    setSocket(io());
   };
 
   return (
