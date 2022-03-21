@@ -22,6 +22,7 @@ class Room {
 }
 const rooms = {};
 
+io.set('origins', '*:*');
 io.on("connection", (socket) => {
   console.log("new user", socket.id);
   socket.on("message-send", (data) => {
