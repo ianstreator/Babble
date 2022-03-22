@@ -1,9 +1,4 @@
 import { createContext, useState } from "react";
-import { io } from "socket.io-client";
-console.log(io)
-
-const checkENV = window.location.href.includes("localhost")
-const wsURL = checkENV ? "localhost:4000" : "https://ian-chatter.netlify.app"
 
 const SocketContext = createContext();
 
@@ -14,13 +9,13 @@ export const SocketProvider = ({ children }) => {
     // const host = io(undefined, {
     //   query: { username, language, capacity },
     // });
-    setSocket(io.connect(wsURL));
+    setSocket(io());
   };
   const guestSocket = (username, roomID, language) => {
     // const guest = io(undefined, {
     //   query: { username, roomID, language },
     // });
-    setSocket(io.connect(wsURL));
+    setSocket(io());
   };
 
   return (
