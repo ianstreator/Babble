@@ -11,7 +11,7 @@ app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 //     res.sendFile(path.join(__dirname, "dist", "index.html"));
 //   });
 // });
-app.get(`/`, (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
