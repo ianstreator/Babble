@@ -11,15 +11,15 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   const hostSocket = (username, language, capacity) => {
-    const host = io(undefined, {
-      query: { username, language, capacity },
-    });
+    // const host = io(undefined, {
+    //   query: { username, language, capacity },
+    // });
     setSocket(io.connect(wsURL));
   };
   const guestSocket = (username, roomID, language) => {
-    const guest = io(undefined, {
-      query: { username, roomID, language },
-    });
+    // const guest = io(undefined, {
+    //   query: { username, roomID, language },
+    // });
     setSocket(io.connect(wsURL));
   };
 
