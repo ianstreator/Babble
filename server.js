@@ -6,10 +6,13 @@ const path = require("path");
 const routes = require("./router.js");
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
-routes.forEach((route) => {
-  app.get(`/${route}`, (req, res) => {
-    res.sendFile(path.join(__dirname, "dist", "index.html"));
-  });
+// routes.forEach((route) => {
+//   app.get(`/${route}`, (req, res) => {
+//     res.sendFile(path.join(__dirname, "dist", "index.html"));
+//   });
+// });
+app.get(`/`, (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 const PORT = process.env.PORT || 4000;
@@ -22,7 +25,6 @@ class Room {
 }
 const rooms = {};
 
-io.set('origins', '*:*');
 io.on("connection", (socket) => {
   console.log("new user", socket.id);
   socket.on("message-send", (data) => {
