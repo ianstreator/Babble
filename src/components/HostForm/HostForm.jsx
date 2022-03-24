@@ -9,14 +9,6 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 // import { toast } from "react-toastify";
 
-// async function socketInitHost(username, language, capacity) {
-//   socket = io(undefined, {
-//     query: { username, language, capacity },
-//   });
-//   socket.emit("message-send", "Host");
-//   socket.on("server-reply", data => console.log(data))
-// }
-
 function HostForm() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -34,7 +26,7 @@ function HostForm() {
       alert("please fill out all fields");
       return null;
     }
-    hostSocket(username, language, capacity);
+    hostSocket(username, language, capacity, "host");
     navigate(`/ChatRoom`);
   };
 

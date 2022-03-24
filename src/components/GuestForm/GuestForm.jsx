@@ -12,7 +12,7 @@ function Guest() {
   const [username, setUsername] = useState("");
   const [roomID, setRoomID] = useState(null);
   const [language, setLanguage] = useState(null);
-  const { guestSocket } = useContext(SocketContext);
+  const { guestSocket, socket } = useContext(SocketContext);
 
   let navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Guest() {
       return null;
     }
 
-    guestSocket(username, roomID, language);
+    guestSocket(username, language, roomID, "guest");
 
     navigate(`/ChatRoom`);
   };
@@ -54,10 +54,12 @@ function Guest() {
             />
 
             <select onChange={(e) => setLanguage(e.target.value)}>
-              <option className="place-holder">Please choose a language</option>
-              <option>Spanish</option>
-              <option>French</option>
-              <option>German</option>
+              <option value={null} className="place-holder">
+                Please choose a language
+              </option>
+              <option value={"Spanish"}>Spanish</option>
+              <option value={"French"}>French</option>
+              <option value={"German"}>German</option>
             </select>
             <div className="btn-container">
               <Button
