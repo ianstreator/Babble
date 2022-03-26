@@ -47,15 +47,14 @@ http.listen(PORT, () => {
 // }
 
 class Room {
-  constructor(host, capacity, users, languages, roomID) {
+  constructor(host, capacity, users, languages) {
     (this.host = host),
       (this.capacity = capacity),
       (this.users = users),
-      (this.languages = languages),
-      (this.roomID = roomID);
+      (this.languages = languages);
   }
 }
-function guidGenerator() {
+function genRoomID() {
   var S4 = function () {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
@@ -63,37 +62,43 @@ function guidGenerator() {
 }
 const rooms = {};
 
-function createRoom(host, language, capacity) {
+function createRoom(host, language, capacity, socket, roomID) {
   const room = new Room(host, capacity, [host], [language]);
-  rooms[guidGenerator()] = room;
+  socket.join(roomID);
+  rooms[roomID] = room;
+  socket.emit("invite id", roomID);
 }
 function joinRoom(guest, language, roomID, socket) {
   const room = rooms[roomID];
-  console.log(socket)
-  if (room && room.users.length - 1 < room.capacity) {
-    if (room.languages.find((e) => e !== language)) {
+  if (room && room.users.length < room.capacity) {
+    socket.join(roomID);
+    if (room.languages.some((e) => e !== language)) {
       room.languages.push(language);
     }
     room.users.push(guest);
-    socket.emit("validate", true);
-  } else {
-    socket.emit("validate", false);
   }
 }
 
 io.on("connection", (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
-  console.log(rooms);
+  const RoomID = roomID || genRoomID();
   role === "host"
-    ? createRoom(username, language, capacity)
+    ? createRoom(username, language, capacity, socket, RoomID)
     : joinRoom(username, language, roomID, socket);
   console.log(rooms);
-  socket.emit("validate", false)
-  socket.on("message-send", (data) => {
-    console.log(data);
-  });
+  const users = rooms[RoomID].users;
+  io.to(RoomID).emit("joined", [RoomID, users]);
+
   socket.on("sender", (data) => {
     console.log(data, socket.id);
-    io.emit("reciever", [data, socket.id]);
+    console.log(rooms[RoomID]);
+    if (rooms[RoomID].users.some((e) => e === username)) {
+      io.to(RoomID).emit("reciever", [data, socket.id]);
+    } else {
+      socket.emit(
+        "error",
+        "you have not joined a room or attempted to join a room that is full..."
+      );
+    }
   });
 });

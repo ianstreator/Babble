@@ -10,7 +10,7 @@ import SocketContext from "../../Context/SocketContext";
 
 function Guest() {
   const [username, setUsername] = useState("");
-  const [roomID, setRoomID] = useState(null);
+  const [roomID, setRoomID] = useState("");
   const [language, setLanguage] = useState(null);
   const { guestSocket, socket } = useContext(SocketContext);
 
@@ -32,6 +32,7 @@ function Guest() {
     }
 
     guestSocket(username, language, roomID, "guest");
+    console.log(socket);
 
     navigate(`/ChatRoom`);
   };
