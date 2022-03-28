@@ -91,7 +91,7 @@ io.on("connection", (socket) => {
     let users = Object.keys(rooms[RoomID].users);
     setTimeout(() => {
       io.to(RoomID).emit("joined", [RoomID, users]);
-    }, 50);
+    }, 200);
 
     socket.on("sender", (data) => {
       io.to(RoomID).emit("reciever", [data, socket.id]);
