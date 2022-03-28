@@ -7,8 +7,9 @@ import RoleSelection from "./components/Role-selection/Role-selection";
 import GuestForm from "./components/GuestForm/GuestForm";
 import HostForm from "./components/HostForm/HostForm";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
-// import Toast from "./components/shared/Toast";
+import Toast from "./components/shared/Toast";
 import { SocketProvider } from "./Context/SocketContext";
+
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
               element={
                 <div className="form">
                   <img src={Logo.Logo} width={250} />
-                  {/* <Toast /> */}
+                  <Toast />
                   <GuestForm />
                 </div>
               }
@@ -40,7 +41,7 @@ function App() {
               element={
                 <div className="form">
                   <img src={Logo.Logo} width={250} />
-                  {/* <Toast /> */}
+                  <Toast />
                   <HostForm />
                 </div>
               }
@@ -52,7 +53,7 @@ function App() {
                   <Link to={"/"}>
                     <img src={Logo.Logo} width={250} />
                   </Link>
-                  {/* <Toast /> */}
+                  <Toast />
                   <ChatRoom />
                 </div>
               }
