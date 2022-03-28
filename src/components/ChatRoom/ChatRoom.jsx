@@ -2,7 +2,7 @@ import "./ChatRoom.css";
 
 import { useState, useContext, useEffect, useRef } from "react";
 import SocketContext from "../../Context/SocketContext";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import Input from "../shared/Input";
 import Button from "../shared/Button";
@@ -30,9 +30,9 @@ function ChatRoom() {
 
   const copyRoomKey = () => {
     const key = document.getElementById("Room-Key");
-    // key.select();
-    // key.setSelectionRange(0, 99999);
+    if (!key.value) return;
     navigator.clipboard.writeText(key.value);
+    toast.success("room ID copied");
   };
 
   useEffect(() => {
@@ -49,11 +49,18 @@ function ChatRoom() {
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
     });
-    socket.on("error", (data) => console.log(data));
     socket.on("joined", (data) => {
       const [inviteID, chatters] = data;
       const RoomKey = document.getElementById("Room-Key");
       RoomKey.value = inviteID;
+      setUsers([...chatters]);
+    });
+    window.addEventListener("unload", () => {
+      socket.emit("disconnect", "true");
+    });
+    socket.on("user-leaving", (data) => {
+      const [username, chatters] = data;
+      toast(`${username} has left the room :/`);
       setUsers([...chatters]);
     });
   }, [socket]);

@@ -7,12 +7,12 @@ import SocketContext from "../../Context/SocketContext";
 import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function HostForm() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [language, setLanguage] = useState(null);
+  const [language, setLanguage] = useState("Please choose a language");
   const [capacity, setCapacity] = useState(2);
   const { hostSocket } = useContext(SocketContext);
 
@@ -22,8 +22,7 @@ function HostForm() {
 
   const navCreate = () => {
     if (username === "" || language === "Please choose a language") {
-      // toast("Please fill out all fields :)");
-      alert("please fill out all fields");
+      toast("Please fill out all fields");
       return null;
     }
     hostSocket(username, language, capacity, "host");

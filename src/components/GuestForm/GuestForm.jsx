@@ -5,13 +5,14 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import SocketContext from "../../Context/SocketContext";
 
 function Guest() {
   const [username, setUsername] = useState("");
   const [roomID, setRoomID] = useState("");
   const [language, setLanguage] = useState(null);
+  const [join, setJoin] = useState(false);
   const { guestSocket, socket } = useContext(SocketContext);
 
   let navigate = useNavigate();
@@ -19,6 +20,24 @@ function Guest() {
   const navBack = () => {
     navigate("/");
   };
+  const connectToRoom = () => {
+    const promise = new Promise((res, rej) => {
+      socket.on("validate", (data) => {
+        if (data) {
+          res(navigate("/ChatRoom"));
+        } else {
+          rej(console.log("error"));
+        }
+      });
+    });
+    return promise;
+  };
+  if (join) {
+    toast.promise(connectToRoom, {
+      success: "you're connected to the room!",
+      error: "there was an issue connecting to this room.",
+    });
+  }
 
   const navJoin = () => {
     if (
@@ -26,15 +45,11 @@ function Guest() {
       roomID === "" ||
       language === "Please choose a language"
     ) {
-      // toast("Please fill out all fields :)");
-      alert("please fill out all fields");
+      toast("Please fill out all fields");
       return null;
     }
-
     guestSocket(username, language, roomID, "guest");
-    console.log(socket);
-
-    navigate(`/ChatRoom`);
+    setJoin(true);
   };
 
   return (

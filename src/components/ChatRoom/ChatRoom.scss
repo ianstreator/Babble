@@ -1,6 +1,6 @@
 .room-info {
   display: flex;
-  padding: .5rem;
+  padding: 0.5rem;
   position: relative;
   width: 100%;
   margin-top: auto;
@@ -15,7 +15,12 @@
     cursor: pointer;
     transition: 200ms;
     margin-left: auto;
-    padding: .5rem;
+    padding: 0.5rem;
+    transition: 400ms;
+    &:hover {
+      background-color: #5d86f0;
+      color: white;
+    }
   }
   .users {
     display: flex;
