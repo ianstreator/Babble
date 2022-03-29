@@ -3,6 +3,7 @@ import "./ChatRoom.css";
 import { useState, useContext, useEffect, useRef } from "react";
 import SocketContext from "../../Context/SocketContext";
 import { toast } from "react-toastify";
+import images from "../../images/export";
 
 import Input from "../shared/Input";
 import Button from "../shared/Button";
@@ -11,7 +12,7 @@ import Card from "../shared/Card";
 function ChatRoom() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(["hello", "ian", "brendan", "luci"]);
   const { socket } = useContext(SocketContext);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
@@ -34,7 +35,7 @@ function ChatRoom() {
     const key = document.getElementById("Room-Key");
     if (!key.value) return;
     navigator.clipboard.writeText(key.value);
-    toast.success("room ID copied");
+    toast.success("room key copied");
   };
   const leaveRoom = () => {
     window.location.href = "/";
@@ -73,7 +74,16 @@ function ChatRoom() {
 
   return (
     <>
-      <Button className={"leave-room"} onClick={leaveRoom} children={"Exit"} />
+      <header>
+        <img
+          src={images.Exit}
+          alt=""
+          className={"leave-room"}
+          onClick={leaveRoom}
+        />
+        <img src={images.Logo} alt="" className="Logo" />
+      </header>
+
       <div className="room-info">
         <div className="users">
           {usersRef.current.map((u) => {
@@ -82,7 +92,7 @@ function ChatRoom() {
         </div>
         <Button
           className={"copy-button"}
-          children={"click to copy room ID"}
+          children={"Room Key"}
           id={"Room-Key"}
           onClick={copyRoomKey}
         />

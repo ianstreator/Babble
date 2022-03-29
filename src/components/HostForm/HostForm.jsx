@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 function HostForm() {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [language, setLanguage] = useState("Please choose a language");
+  const [language, setLanguage] = useState(null);
   const [capacity, setCapacity] = useState(2);
   const { hostSocket } = useContext(SocketContext);
 
@@ -21,8 +21,8 @@ function HostForm() {
   };
 
   const navCreate = () => {
-    if (username === "" || language === "Please choose a language") {
-      toast("Please fill out all fields");
+    if (username === "" || language === null) {
+      toast.warning("Please fill out all fields");
       return null;
     }
     hostSocket(username, language, capacity, "host");
@@ -39,6 +39,7 @@ function HostForm() {
               placeholder={"Username"}
               className={"input"}
               onChange={(e) => setUsername(e.target.value)}
+              maxLength={7}
             />
             <select onChange={(e) => setLanguage(e.target.value)}>
               <option value={null} className="place-holder">
@@ -54,7 +55,7 @@ function HostForm() {
                 className="capacity"
                 type={"range"}
                 min={2}
-                max={6}
+                max={4}
                 value={capacity}
                 onChange={(e) => setCapacity(e.target.value)}
               />

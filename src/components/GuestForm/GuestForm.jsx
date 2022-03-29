@@ -21,31 +21,29 @@ function Guest() {
   };
   const connectToRoom = () => {
     const promise = new Promise((res, rej) => {
-      socket.on("validate", (data) => {
-        if (data) {
-          res(navigate("/ChatRoom"));
-        } else {
-          rej(console.log("error"));
-        }
-      });
+      setTimeout(() => {
+        socket.on("validate", (data) => {
+          if (data) {
+            res(navigate("/ChatRoom"));
+          } else {
+            rej();
+          }
+        });
+      }, 350);
     });
     return promise;
   };
   if (join) {
     toast.promise(connectToRoom, {
+      pending: "connecting to the room...",
       success: "you're connected to the room!",
       error: "there was an issue connecting to this room.",
     });
   }
 
   const navJoin = () => {
-    if (
-      username === "" ||
-      roomID === "" ||
-      language === "Please choose a language"
-    ) {
-      toast("Please fill out all fields");
-      return null;
+    if (username === "" || roomID === "" || language === null) {
+      return toast("Please fill out all fields");
     }
     guestSocket(username, language, roomID, "guest");
     setJoin(true);
@@ -61,6 +59,7 @@ function Guest() {
               placeholder={"Username"}
               className={"input"}
               onChange={(e) => setUsername(e.target.value)}
+              maxLength={7}
             />
             <Input
               placeholder={"RoomID"}

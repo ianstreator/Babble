@@ -1,13 +1,12 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function App(){
-
+function App() {
   return (
     <div>
-      <ToastContainer theme='dark'/>
+      <ToastContainer theme="dark" />
     </div>
   );
 }
 
-export default App
+export default App;

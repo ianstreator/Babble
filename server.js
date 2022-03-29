@@ -12,7 +12,7 @@ app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 app.enable("trust proxy");
 
 const isProd = process.env.NODE_ENV === "production";
-if (!isProd) {
+if (isProd) {
   app.use(cors());
 }
 
@@ -106,8 +106,12 @@ io.on("connection", (socket) => {
         const users = Object.keys(rooms[RoomID].users);
         if (rooms[RoomID].host === username) {
           rooms[RoomID].host = users[0];
+          console.log("host has left the room assigning new host..");
+          if (!users[0]) {
+            delete rooms[RoomID];
+            console.log("last user has left the room, room has been removed..");
+          }
         }
-        console.log(rooms[RoomID]);
         io.to(RoomID).emit("user-leaving", [username, users]);
       }
     });

@@ -1,5 +1,5 @@
 import "./App.css";
-import Logo from "./images/export";
+import images from "./images/export";
 
 import { Route, Routes, BrowserRouter as Router, Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ function App() {
               path="/"
               element={
                 <div className="form">
-                  <img src={Logo.Logo} width={250} />
+                  <img src={images.Logo} width={250} />
                   <RoleSelection />
                 </div>
               }
@@ -29,7 +29,7 @@ function App() {
               path="/GuestForm"
               element={
                 <div className="form">
-                  <img src={Logo.Logo} width={250} />
+                  <img src={images.Logo} width={250} />
                   <Toast />
                   <GuestForm />
                 </div>
@@ -39,7 +39,7 @@ function App() {
               path="/HostForm"
               element={
                 <div className="form">
-                  <img src={Logo.Logo} width={250} />
+                  <img src={images.Logo} width={250} />
                   <Toast />
                   <HostForm />
                 </div>
@@ -49,7 +49,7 @@ function App() {
               path="/ChatRoom"
               element={
                 <div className="form">
-                  <img src={Logo.Logo} width={250} />
+                  {/* <img src={images.Logo} width={250} /> */}
                   <Toast />
                   <ChatRoom />
                 </div>
