@@ -14,7 +14,6 @@ function Guest() {
   const [language, setLanguage] = useState(null);
   const [join, setJoin] = useState(false);
   const { guestSocket, socket } = useContext(SocketContext);
-
   let navigate = useNavigate();
 
   const navBack = () => {

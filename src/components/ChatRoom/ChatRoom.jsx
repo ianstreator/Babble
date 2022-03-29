@@ -17,6 +17,8 @@ function ChatRoom() {
   messagesRef.current = messages;
   const usersRef = useRef(users);
   usersRef.current = users;
+  const chatRoom = window.location.href;
+  console.log(chatRoom);
 
   const sendStyle = {
     backgroundColor: "#5D86F0",
@@ -33,6 +35,9 @@ function ChatRoom() {
     if (!key.value) return;
     navigator.clipboard.writeText(key.value);
     toast.success("room ID copied");
+  };
+  const leaveRoom = () => {
+    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -58,6 +63,7 @@ function ChatRoom() {
     window.addEventListener("unload", () => {
       socket.emit("disconnect", "true");
     });
+
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
       toast(`${username} has left the room :/`);
@@ -67,6 +73,7 @@ function ChatRoom() {
 
   return (
     <>
+      <Button className={"leave-room"} onClick={leaveRoom} children={"Exit"} />
       <div className="room-info">
         <div className="users">
           {usersRef.current.map((u) => {

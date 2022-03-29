@@ -8,6 +8,8 @@ const { Translate } = require("@google-cloud/translate");
 const routes = require("./router.js");
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
+app.enable("trust proxy");
+
 // routes.forEach((route) => {
 //   app.get(`/${route}`, (req, res) => {
 //     res.sendFile(path.join(__dirname, "dist", "index.html"));

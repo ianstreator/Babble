@@ -10,7 +10,6 @@ import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Toast from "./components/shared/Toast";
 import { SocketProvider } from "./Context/SocketContext";
 
-
 function App() {
   return (
     <>
@@ -50,9 +49,7 @@ function App() {
               path="/ChatRoom"
               element={
                 <div className="form">
-                  <Link to={"/"}>
-                    <img src={Logo.Logo} width={250} />
-                  </Link>
+                  <img src={Logo.Logo} width={250} />
                   <Toast />
                   <ChatRoom />
                 </div>
