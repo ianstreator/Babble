@@ -22,7 +22,7 @@ function HostForm() {
 
   const navCreate = () => {
     if (username === "" || language === null) {
-      toast.warning("Please fill out all fields");
+      toast("Please fill out all fields");
       return null;
     }
     hostSocket(username, language, capacity, "host");

@@ -61,13 +61,13 @@ function ChatRoom() {
       RoomKey.value = inviteID;
       setUsers([...chatters]);
     });
-    window.addEventListener("unload", () => {
-      socket.emit("disconnect", "true");
-    });
+    // window.addEventListener("unload", () => {
+    //   socket.emit("disconnect", "true");
+    // });
 
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
-      toast(`${username} has left the room :/`);
+      toast(`${username} has left the room.`);
       setUsers([...chatters]);
     });
   }, [socket]);

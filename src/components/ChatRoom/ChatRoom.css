@@ -29,7 +29,6 @@ header .leave-room {
   position: relative;
   width: 100%;
   margin-top: auto;
-  padding: 1rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -61,7 +60,6 @@ header .leave-room {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0.5rem;
   width: 100%;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
@@ -69,8 +67,8 @@ header .leave-room {
 }
 
 .room-info .user {
-  -webkit-box-shadow: 0px -5px 15px -2px rgba(255, 255, 255, 0.425) inset;
-          box-shadow: 0px -5px 15px -2px rgba(255, 255, 255, 0.425) inset;
+  -webkit-box-shadow: 0px -6px 15px -6px #a7a7a7 inset;
+          box-shadow: 0px -6px 15px -6px #a7a7a7 inset;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,7 +87,7 @@ header .leave-room {
   width: 45px;
   height: 45px;
   font-size: 16px;
-  margin: 0.25rem;
+  margin-left: 0.5rem;
   margin-right: 1rem;
   font-family: monospace;
 }
@@ -100,9 +98,8 @@ header .leave-room {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  min-height: 80%;
+  max-height: 80%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -118,8 +115,10 @@ header .leave-room {
 
 .chat-room-container .message-container {
   background-color: #343434;
-  height: 100%;
-  max-height: 100vh;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  max-height: 100%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -138,6 +137,7 @@ header .leave-room {
 
 .chat-room-container .message-input-container {
   height: 4rem;
+  min-height: 4rem;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -228,6 +228,8 @@ header .leave-room {
   .chat-room-container {
     width: 100vw;
     margin-bottom: unset;
+    min-height: 85%;
+    max-height: 85%;
   }
 }
 /*# sourceMappingURL=ChatRoom.css.map */

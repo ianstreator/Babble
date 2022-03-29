@@ -21,7 +21,6 @@ function Guest() {
   };
   const connectToRoom = () => {
     const promise = new Promise((res, rej) => {
-      setTimeout(() => {
         socket.on("validate", (data) => {
           if (data) {
             res(navigate("/ChatRoom"));
@@ -29,13 +28,11 @@ function Guest() {
             rej();
           }
         });
-      }, 350);
     });
     return promise;
   };
   if (join) {
     toast.promise(connectToRoom, {
-      pending: "connecting to the room...",
       success: "you're connected to the room!",
       error: "there was an issue connecting to this room.",
     });

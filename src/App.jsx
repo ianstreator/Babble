@@ -20,7 +20,7 @@ function App() {
               path="/"
               element={
                 <div className="form">
-                  <img src={images.Logo} width={250} />
+                  <img src={images.Logo} className="Logo" />
                   <RoleSelection />
                 </div>
               }
@@ -29,7 +29,7 @@ function App() {
               path="/GuestForm"
               element={
                 <div className="form">
-                  <img src={images.Logo} width={250} />
+                  <img src={images.Logo} className="Logo" />
                   <Toast />
                   <GuestForm />
                 </div>
@@ -39,7 +39,7 @@ function App() {
               path="/HostForm"
               element={
                 <div className="form">
-                  <img src={images.Logo} width={250} />
+                  <img src={images.Logo} className="Logo" />
                   <Toast />
                   <HostForm />
                 </div>
@@ -49,7 +49,7 @@ function App() {
               path="/ChatRoom"
               element={
                 <div className="form">
-                  {/* <img src={images.Logo} width={250} /> */}
+                  {/* <img src={images.Logo} className="Logo" /> */}
                   <Toast />
                   <ChatRoom />
                 </div>
