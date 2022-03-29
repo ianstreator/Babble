@@ -12,7 +12,7 @@ import Card from "../shared/Card";
 function ChatRoom() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(["ian"]);
   const { socket } = useContext(SocketContext);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;

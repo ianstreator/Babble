@@ -45,12 +45,10 @@ body {
   #root {
     width: 100%;
     overflow-x: hidden;
+    height: 100vh;
+    max-height: 100vh;
   }
   .Logo {
     width: 150px;
   }
-}
-
-.Toastify__toast-container {
-  width: 10px;
 }
