@@ -3,6 +3,7 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
+const cors = require("cors");
 const axios = require("axios");
 const { Translate } = require("@google-cloud/translate");
 const routes = require("./router.js");
@@ -10,11 +11,11 @@ const routes = require("./router.js");
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 app.enable("trust proxy");
 
-// routes.forEach((route) => {
-//   app.get(`/${route}`, (req, res) => {
-//     res.sendFile(path.join(__dirname, "dist", "index.html"));
-//   });
-// });
+const isProd = process.env.NODE_ENV === "production";
+if (!isProd) {
+  app.use(cors());
+}
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
