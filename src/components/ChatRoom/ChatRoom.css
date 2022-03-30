@@ -10,15 +10,21 @@ header {
           justify-content: center;
   width: 100vw;
   position: relative;
+  background-color: #16181d;
+}
+
+header .Logo {
+  width: 170px;
+  margin: 1rem;
 }
 
 header .leave-room {
   position: absolute;
-  width: 45px;
+  width: 35px;
   cursor: pointer;
-  top: 0;
   left: 0;
-  margin: 1.5rem;
+  height: 100%;
+  margin-left: 1rem;
 }
 
 .room-info {
@@ -98,8 +104,8 @@ header .leave-room {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  min-height: 80%;
-  max-height: 80%;
+  min-height: 75%;
+  max-height: 75%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -210,6 +216,9 @@ header .leave-room {
 }
 
 @media screen and (max-width: 600px) and (max-height: 900px) {
+  header .leave-room {
+    width: 30px;
+  }
   .room-info {
     width: 100vw;
   }
@@ -218,18 +227,14 @@ header .leave-room {
     width: 25px;
     height: 25px;
   }
-  header .leave-room {
-    width: 30px;
-    margin: 1rem;
-  }
   .room-info .copy-button {
     margin-right: 0.5rem;
   }
   .chat-room-container {
     width: 100vw;
     margin-bottom: unset;
-    min-height: 85%;
-    max-height: 85%;
+    min-height: 82.5%;
+    max-height: 82.5%;
   }
 }
 /*# sourceMappingURL=ChatRoom.css.map */

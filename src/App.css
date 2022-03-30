@@ -61,11 +61,12 @@ body {
 
 .Logo {
   width: 250px;
+  margin: 2rem;
 }
 
 @media screen and (max-width: 600px) and (max-height: 900px) {
   .Logo {
-    width: 150px;
+    width: 200px;
   }
 }
 /*# sourceMappingURL=App.css.map */
