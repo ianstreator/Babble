@@ -1,20 +1,15 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
-const cors = require("cors");
 const axios = require("axios");
-const { Translate } = require("@google-cloud/translate");
+const { Translate } = require("@google-cloud/translate").v2;
 const routes = require("./router.js");
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 app.enable("trust proxy");
-
-const isProd = process.env.NODE_ENV === "production";
-if (isProd) {
-  app.use(cors());
-}
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
@@ -25,45 +20,36 @@ http.listen(PORT, () => {
   console.log(`server listening on port:${PORT}`);
 });
 
-// const translate = new Translate();
+const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 
-// const text = "good morning Luci, I hope you slept well.";
-// const target = "es";
+const translate = new Translate({
+  credentials: CREDENTIALS,
+  projectId: CREDENTIALS.project_id,
+});
 
-// async function translateText() {
-//   // Translates the text into the target language. "text" can be a string for
-//   // translating a single piece of text, or an array of strings for translating
-//   // multiple texts.
-//   let [translations] = await translate.translate(text, target);
-//   translations = Array.isArray(translations) ? translations : [translations];
-//   console.log("Translations:");
-//   translations.forEach((translation, i) => {
-//     console.log(`${text[i]} => (${target}) ${translation}`);
-//   });
-// }
 
-// translateText();
-// async function translateText() {
-//   const googleTrans = await axios.post(
-//     `https://translation.googleapis.com/language/translate/v2`
-//   );
-// }
-
-class Room {
-  constructor(host, capacity, users) {
-    (this.host = host), (this.capacity = capacity), (this.users = users);
-  }
+async function translateText(text, target) {
+  // Translates the text into the target language. "text" can be a string for
+  // translating a single piece of text, or an array of strings for translating
+  // multiple texts.
+  let [translations] = await translate.translate(text, target);
+  translations = Array.isArray(translations) ? translations : [translations];
+  console.log("Translations:");
+  translations.forEach((translation, i) => {
+    console.log(`${text[i]} => (${target}) ${translation}`);
+  });
+  console.log(translations[0]);
+  return translations[0];
 }
+
 function genRoomID() {
   var S4 = function () {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
   return S4() + S4() + "-" + S4();
 }
-const rooms = {};
-
 function createRoom(host, language, capacity, socket, roomID) {
-  const room = new Room(host, capacity, {});
+  const room = new Room(host, capacity, {}, [language]);
   room.users[host] = language;
   socket.join(roomID);
   rooms[roomID] = room;
@@ -76,8 +62,23 @@ function joinRoom(guest, language, roomID, socket) {
   if (room && numOfUsers <= room.capacity) {
     socket.join(roomID);
     room.users[guest] = language;
+    if (room.languages.some((l) => l === language)) {
+      return;
+    } else {
+      room.languages.push(language);
+    }
   }
 }
+class Room {
+  constructor(host, capacity, users, languages) {
+    (this.host = host),
+      (this.capacity = capacity),
+      (this.users = users),
+      (this.languages = languages);
+  }
+}
+
+const rooms = {};
 
 io.on("connection", (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
@@ -97,7 +98,10 @@ io.on("connection", (socket) => {
     }, 200);
 
     socket.on("sender", (data) => {
-      io.to(RoomID).emit("reciever", [data, socket.id]);
+      rooms[RoomID].languages.forEach(async (l) => {
+        const transText = await translateText(data, l);
+        io.to(RoomID).emit(`${l}`, [`${transText}`, socket.id]);
+      });
     });
 
     socket.on("disconnect", (data) => {
