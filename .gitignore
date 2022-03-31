@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 package-lock.json
+dotted-journey-345008-2ef9150a6014.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

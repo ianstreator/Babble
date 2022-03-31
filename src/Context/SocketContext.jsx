@@ -5,8 +5,10 @@ const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
+  const [language, setLanguage] = useState("");
 
   const hostSocket = (username, language, capacity, role) => {
+    setLanguage(language);
     const host = io(undefined, {
       query: { username, language, capacity, role },
     });
@@ -14,6 +16,8 @@ export const SocketProvider = ({ children }) => {
   };
 
   const guestSocket = (username, language, roomID, role) => {
+    setLanguage(language);
+
     const guest = io(undefined, {
       query: { username, language, roomID, role },
     });
@@ -23,6 +27,7 @@ export const SocketProvider = ({ children }) => {
   return (
     <SocketContext.Provider
       value={{
+        language,
         socket,
         hostSocket,
         guestSocket,

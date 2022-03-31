@@ -12,14 +12,12 @@ import Card from "../shared/Card";
 function ChatRoom() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState(["ian"]);
-  const { socket } = useContext(SocketContext);
+  const [users, setUsers] = useState([]);
+  const { socket, language } = useContext(SocketContext);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
   const usersRef = useRef(users);
   usersRef.current = users;
-  const chatRoom = window.location.href;
-  console.log(chatRoom);
 
   const sendStyle = {
     backgroundColor: "#5D86F0",
@@ -42,7 +40,7 @@ function ChatRoom() {
   };
 
   useEffect(() => {
-    socket.on("reciever", (data) => {
+    socket.on(`${language}`, (data) => {
       console.log(messagesRef);
       const [socketMessage, id] = data;
       const style = id === socket.id ? "send" : "recieve";
@@ -61,10 +59,6 @@ function ChatRoom() {
       RoomKey.value = inviteID;
       setUsers([...chatters]);
     });
-    // window.addEventListener("unload", () => {
-    //   socket.emit("disconnect", "true");
-    // });
-
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
       toast(`${username} has left the room.`);

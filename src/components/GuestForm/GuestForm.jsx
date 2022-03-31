@@ -68,9 +68,9 @@ function Guest() {
               <option value={null} className="place-holder">
                 Please choose a language
               </option>
-              <option value={"Spanish"}>Spanish</option>
-              <option value={"French"}>French</option>
-              <option value={"German"}>German</option>
+              <option value={"es"}>Spanish</option>
+              <option value={"en"}>English</option>
+              <option value={"it"}>Italian</option>
             </select>
             <div className="btn-container">
               <Button
