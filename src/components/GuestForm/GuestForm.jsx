@@ -13,21 +13,23 @@ function Guest() {
   const [roomID, setRoomID] = useState("");
   const [language, setLanguage] = useState(null);
   const [join, setJoin] = useState(false);
-  const { guestSocket, socket } = useContext(SocketContext);
+  const { guestSocket, socket, languageList } = useContext(SocketContext);
   let navigate = useNavigate();
+
+  
 
   const navBack = () => {
     navigate("/");
   };
   const connectToRoom = () => {
     const promise = new Promise((res, rej) => {
-        socket.on("validate", (data) => {
-          if (data) {
-            res(navigate("/ChatRoom"));
-          } else {
-            rej();
-          }
-        });
+      socket.on("validate", (data) => {
+        if (data) {
+          res(navigate("/ChatRoom"));
+        } else {
+          rej();
+        }
+      });
     });
     return promise;
   };
@@ -68,9 +70,9 @@ function Guest() {
               <option value={null} className="place-holder">
                 Please choose a language
               </option>
-              <option value={"es"}>Spanish</option>
-              <option value={"en"}>English</option>
-              <option value={"it"}>Italian</option>
+              {Object.entries(languageList).map((l) => {
+                return <option value={l[1]}>{l[0]}</option>;
+              })}
             </select>
             <div className="btn-container">
               <Button

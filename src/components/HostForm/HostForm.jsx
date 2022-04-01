@@ -14,7 +14,7 @@ function HostForm() {
   const [username, setUsername] = useState("");
   const [language, setLanguage] = useState(null);
   const [capacity, setCapacity] = useState(2);
-  const { hostSocket } = useContext(SocketContext);
+  const { hostSocket, languageList } = useContext(SocketContext);
 
   const navBack = () => {
     navigate("/");
@@ -45,9 +45,9 @@ function HostForm() {
               <option value={null} className="place-holder">
                 Please choose a language
               </option>
-              <option value={"es"}>Spanish</option>
-              <option value={"en"}>English</option>
-              <option value={"it"}>Italian</option>
+              {Object.entries(languageList).map((l) => {
+                return <option value={l[1]}>{l[0]}</option>;
+              })}
             </select>
             <div className="capacity-container">
               <p>Capacity: {capacity}</p>

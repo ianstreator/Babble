@@ -126,19 +126,20 @@ io.on("connection", async (socket) => {
       messageLimiter.unshift(currentTime);
       messageLimiter.splice(2, 1);
       if (messageLimiter[0] - messageLimiter[1] < 2000) {
-        if (language === "en") {
-          socket.emit(
-            "server spam alert",
-            "2 seconds between messages please."
-          );
-        } else {
-          const transText = await translateText(
-            "2 seconds between messages please.",
-            language
-          );
-          socket.emit("server spam alert", `${transText}`);
-        }
+        socket.emit("server spam alert", true);
         return;
+        // if (language === "en") {
+        //   socket.emit(
+        //     "server spam alert",
+        //     "2 seconds between messages please."
+        //   );
+        // } else {
+        //   const transText = await translateText(
+        //     "2 seconds between messages please.",
+        //     language
+        //   );
+        //   socket.emit("server spam alert", `${transText}`);
+        // }
       }
       rooms[RoomID].languages.forEach(async (l) => {
         if (language === l) {
@@ -165,6 +166,7 @@ io.on("connection", async (socket) => {
           if (!users[0]) {
             delete rooms[RoomID];
             console.log("last user has left the room, room has been removed..");
+            return
           }
         }
         const newUsers = Object.keys(rooms[RoomID].users);

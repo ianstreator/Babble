@@ -13,6 +13,7 @@ function ChatRoom() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+  const [limiter, setLimiter] = useState(false);
   const { socket, language } = useContext(SocketContext);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
@@ -24,9 +25,15 @@ function ChatRoom() {
     color: "white",
   };
   const sendMessage = () => {
+    if (limiter)
+      return toast.info("you may only send a message every two seconds");
     if (message === "") return;
     socket.emit("sender", message);
     setMessage("");
+    setLimiter(true);
+    setTimeout(() => {
+      setLimiter(false);
+    }, 2000);
   };
 
   const copyRoomKey = () => {
@@ -59,7 +66,9 @@ function ChatRoom() {
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
     });
-    socket.on("server spam alert", (data) => toast.info(data));
+    socket.on("server spam alert", (data) =>
+      toast.info("you may only send a message every two seconds")
+    );
 
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;

@@ -3,12 +3,8 @@ import "./Role-selection.css";
 import Button from "../shared/Button";
 
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import SocketContext from "../../Context/SocketContext";
 
 function RoleSelection() {
-  // const { getLanguages } = useContext(SocketContext);
-  // getLanguages();
 
   let navigate = useNavigate();
 
