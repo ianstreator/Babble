@@ -6,6 +6,24 @@ const SocketContext = createContext();
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [language, setLanguage] = useState("");
+  const [languageOption, setLanguageOption] = useState([]);
+
+  const getLanguages = async () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    const URL = window.location.href.includes("localhost")
+      ? "http://localhost:4000/"
+      : "https://chatter-i.herokuapp.com";
+    const res = await fetch(`${URL}languages`, options);
+    const languageList = await res.json();
+    setLanguageOption(...languageList);
+    console.log(languageOption);
+    // console.log(typeof languageList);
+    // console.log(languageList);
+
+  };
 
   const hostSocket = (username, language, capacity, role) => {
     setLanguage(language);
@@ -31,6 +49,7 @@ export const SocketProvider = ({ children }) => {
         socket,
         hostSocket,
         guestSocket,
+        getLanguages,
       }}
     >
       {children}

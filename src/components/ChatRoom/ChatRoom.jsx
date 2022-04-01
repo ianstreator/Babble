@@ -40,6 +40,12 @@ function ChatRoom() {
   };
 
   useEffect(() => {
+    socket.on("joined", (data) => {
+      const [inviteID, chatters] = data;
+      const RoomKey = document.getElementById("Room-Key");
+      RoomKey.value = inviteID;
+      setUsers([...chatters]);
+    });
     socket.on(`${language}`, (data) => {
       console.log(messagesRef);
       const [socketMessage, id] = data;
@@ -53,12 +59,8 @@ function ChatRoom() {
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
     });
-    socket.on("joined", (data) => {
-      const [inviteID, chatters] = data;
-      const RoomKey = document.getElementById("Room-Key");
-      RoomKey.value = inviteID;
-      setUsers([...chatters]);
-    });
+    socket.on("server spam alert", (data) => toast.info(data));
+
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
       toast(`${username} has left the room.`);
@@ -108,7 +110,10 @@ function ChatRoom() {
           <Input
             className={"text-input"}
             placeholder={"Type message here"}
-            onChange={(e) => setMessage(e.target.value)}
+            maxLength={120}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
             value={message}
             onKeyPress={(e) => (e.key === "Enter" ? sendMessage() : null)}
           />
