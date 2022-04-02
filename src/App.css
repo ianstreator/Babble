@@ -59,12 +59,7 @@ body {
   max-height: 100vh;
 }
 
-.Logo {
-  width: 250px;
-  margin: 2rem;
-}
-
-footer {
+#root .form footer {
   position: absolute;
   bottom: 0;
   display: -webkit-box;
@@ -76,17 +71,17 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100vw;
-  padding: 1rem;
+  width: 100%;
+  padding-bottom: 1rem;
 }
 
-footer img {
-  width: 25px;
-  margin-left: .5rem;
-  margin-right: .25rem;
+#root .form footer img {
+  width: 20px;
+  margin-left: 0.5rem;
+  margin-right: 0.25rem;
 }
 
-footer p {
+#root .form footer p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -99,7 +94,7 @@ footer p {
   margin: 0.5rem;
 }
 
-footer p a {
+#root .form footer p a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -113,16 +108,21 @@ footer p a {
   color: #5d86f0;
 }
 
-footer p a:hover {
+#root .form footer p a:hover {
   color: #7397f2;
+}
+
+.Logo {
+  width: 250px;
+  margin: 2rem;
 }
 
 @media screen and (max-width: 600px) and (max-height: 900px) {
   .Logo {
     width: 200px;
   }
-  footer {
-    font-size: 12px;
+  .form footer {
+    font-size: 9px;
   }
 }
 /*# sourceMappingURL=App.css.map */
