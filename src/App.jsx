@@ -8,8 +8,8 @@ import GuestForm from "./components/GuestForm/GuestForm";
 import HostForm from "./components/HostForm/HostForm";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
 import Toast from "./components/shared/Toast";
+import Footer from "./components/shared/Footer";
 import { SocketProvider } from "./Context/SocketContext";
-
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
                 <div className="form">
                   <img src={images.Logo} className="Logo" />
                   <RoleSelection />
+                  <Footer />
                 </div>
               }
             />
@@ -33,6 +34,7 @@ function App() {
                   <img src={images.Logo} className="Logo" />
                   <Toast />
                   <GuestForm />
+                  <Footer />
                 </div>
               }
             />
@@ -43,6 +45,7 @@ function App() {
                   <img src={images.Logo} className="Logo" />
                   <Toast />
                   <HostForm />
+                  <Footer />
                 </div>
               }
             />
@@ -50,7 +53,6 @@ function App() {
               path="/ChatRoom"
               element={
                 <div className="form">
-                  {/* <img src={images.Logo} className="Logo" /> */}
                   <Toast />
                   <ChatRoom />
                 </div>

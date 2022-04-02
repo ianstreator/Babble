@@ -82,11 +82,11 @@ function ChatRoom() {
       <header>
         <img
           src={images.Exit}
-          alt=""
+          alt="exit"
           className={"leave-room"}
           onClick={leaveRoom}
         />
-        <img src={images.Logo} alt="" className="Logo" />
+        <img src={images.Logo} alt="Chatter" className="Logo" />
       </header>
 
       <div className="room-info">

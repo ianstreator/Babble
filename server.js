@@ -110,6 +110,7 @@ const rooms = {};
 io.on("connection", async (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
   const RoomID = roomID || genRoomID();
+  if (!rooms[RoomID] && role === "guest") return socket.emit("validate", false);
   (await role) === "host"
     ? createRoom(username, language, capacity, socket, RoomID)
     : joinRoom(username, language, roomID, socket);
@@ -166,7 +167,7 @@ io.on("connection", async (socket) => {
           if (!users[0]) {
             delete rooms[RoomID];
             console.log("last user has left the room, room has been removed..");
-            return
+            return;
           }
         }
         const newUsers = Object.keys(rooms[RoomID].users);

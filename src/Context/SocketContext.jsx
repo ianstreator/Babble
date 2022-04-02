@@ -117,23 +117,10 @@ export const SocketProvider = ({ children }) => {
     Yoruba: "yo",
     Zulu: "zu",
   };
-
-  // const getLanguages = async () => {
-  //   const options = {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   };
-  //   const URL = window.location.href.includes("localhost")
-  //     ? "http://localhost:4000/"
-  //     : "https://chatter-i.herokuapp.com";
-  //   const res = await fetch(`${URL}languages`, options);
-  //   const languageList = await res.json();
-  //   setLanguageOption(...languageList);
-  //   console.log(languageOption);
-  //   // console.log(typeof languageList);
-  //   // console.log(languageList);
-
-  // };
+  const deviceLanguageValue = window.navigator.language.split("-")[0];
+  const deviceLanguage = Object.keys(languageList).find(
+    (l) => languageList[l] === window.navigator.language.split("-")[0]
+  );
 
   const hostSocket = (username, language, capacity, role) => {
     setLanguage(language);
@@ -155,6 +142,8 @@ export const SocketProvider = ({ children }) => {
   return (
     <SocketContext.Provider
       value={{
+        deviceLanguage,
+        deviceLanguageValue,
         languageList,
         language,
         socket,
