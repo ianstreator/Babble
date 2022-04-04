@@ -4,7 +4,6 @@ const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
-const axios = require("axios");
 const { Translate } = require("@google-cloud/translate").v2;
 const routes = require("./router.js");
 
@@ -27,31 +26,7 @@ const translate = new Translate({
   projectId: CREDENTIALS.project_id,
 });
 
-// const languagesGet = async () => {
-//   const [languages] = await translate.getLanguages();
-//   console.log(languages);
-// };
-// languagesGet();
-// const currentTime = Date;
-
-// console.log(currentTime.now());
-
-// app.get("/languages", async (req, res) => {
-//   console.log("hello");
-
-//   try {
-//     const [languages] = await translate.getLanguages();
-//     console.log(languages);
-//     res.send(languages);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
 async function translateText(text, target) {
-  // Translates the text into the target language. "text" can be a string for
-  // translating a single piece of text, or an array of strings for translating
-  // multiple texts.
   let [translations] = await translate.translate(text, target);
   translations = Array.isArray(translations) ? translations : [translations];
   console.log("Translations:");
@@ -74,6 +49,7 @@ function createRoom(host, language, capacity, socket, roomID) {
   socket.join(roomID);
   rooms[roomID] = room;
   socket.emit("invite id", roomID);
+  console.log(`User : [${host}] *has created* Room : [${roomID}]`);
 }
 function joinRoom(guest, language, roomID, socket) {
   const room = rooms[roomID];
@@ -81,12 +57,13 @@ function joinRoom(guest, language, roomID, socket) {
   const numOfUsers = userNames.length;
   if (
     room &&
-    numOfUsers <= room.capacity &&
+    numOfUsers < room.capacity &&
     !userNames.some((n) => n === guest)
   ) {
     socket.join(roomID);
     socket.emit("validate", true);
     room.users[guest] = language;
+    console.log(`User : [${guest}] *has joined* Room : [${roomID}]`);
     if (room.languages.some((l) => l === language)) {
       return;
     } else {
@@ -129,18 +106,6 @@ io.on("connection", async (socket) => {
       if (messageLimiter[0] - messageLimiter[1] < 2000) {
         socket.emit("server spam alert", true);
         return;
-        // if (language === "en") {
-        //   socket.emit(
-        //     "server spam alert",
-        //     "2 seconds between messages please."
-        //   );
-        // } else {
-        //   const transText = await translateText(
-        //     "2 seconds between messages please.",
-        //     language
-        //   );
-        //   socket.emit("server spam alert", `${transText}`);
-        // }
       }
       rooms[RoomID].languages.forEach(async (l) => {
         if (language === l) {
@@ -153,26 +118,32 @@ io.on("connection", async (socket) => {
     });
 
     socket.on("disconnect", (data) => {
-      if (data) {
-        const users = rooms[RoomID].users;
-        console.log(username);
-        console.log(users[`${username}`]);
+      const room = rooms[RoomID];
+      const users = room.users;
+      const langIndex = rooms[RoomID].languages.findIndex(
+        (l) => l === language
+      );
+      delete rooms[RoomID].users[username];
+      if (!Object.values(users).find((l) => l === language))
+        rooms[RoomID].languages.splice(langIndex, 1);
 
-        delete rooms[RoomID].users[username];
-        console.log(users);
-        console.log(users[username]);
-        if (rooms[RoomID].host === username) {
-          rooms[RoomID].host = users[0];
-          console.log("host has left the room assigning new host..");
-          if (!users[0]) {
-            delete rooms[RoomID];
-            console.log("last user has left the room, room has been removed..");
-            return;
-          }
+      console.log(`User : [${username}] *has left* Room : [${roomID}]`);
+      console.log(room);
+      if (room.host === username) {
+        if (!Object.keys(users)[0]) {
+          delete rooms[RoomID];
+          console.log(
+            `all users are gone, Room : [${RoomID}] has been removed..`
+          );
+          return;
         }
-        const newUsers = Object.keys(rooms[RoomID].users);
-        io.to(RoomID).emit("user-leaving", [username, newUsers]);
+        room.host = Object.keys(users)[0];
+        console.log("host has left the room assigning new host..");
+        console.log(room);
       }
+      const newUsers = Object.keys(rooms[RoomID].users);
+      io.to(RoomID).emit("user-leaving", [username, newUsers]);
+
     });
   }
 });
