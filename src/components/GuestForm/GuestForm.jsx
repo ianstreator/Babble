@@ -42,9 +42,14 @@ function Guest() {
       success: "you're connected to the room!",
       error: "there was an issue connecting to this room.",
     });
+    setTimeout(() => {
+      setJoin(false);
+    }, 7500);
   }
 
   const navJoin = () => {
+    if (join)
+      return toast("please wait before attempting to join a room again..");
     if (username === "" || roomID === "" || language === null) {
       return toast("Please fill out all fields");
     }

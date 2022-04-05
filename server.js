@@ -55,11 +55,9 @@ function joinRoom(guest, language, roomID, socket) {
   const room = rooms[roomID];
   const userNames = Object.keys(room.users);
   const numOfUsers = userNames.length;
-  if (
-    room &&
-    numOfUsers < room.capacity &&
-    !userNames.some((n) => n === guest)
-  ) {
+  const capacity = numOfUsers < room.capacity;
+  const nameTaken = userNames.some((n) => n === guest);
+  if (room && capacity && !nameTaken) {
     socket.join(roomID);
     socket.emit("validate", true);
     room.users[guest] = language;
