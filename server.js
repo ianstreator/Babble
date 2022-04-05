@@ -1,17 +1,19 @@
 require("dotenv").config();
+const { Translate } = require("@google-cloud/translate").v2;
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
-const { Translate } = require("@google-cloud/translate").v2;
 const routes = require("./router.js");
 
 app.use("/assets", express.static(path.join(__dirname, "dist", "assets")));
 app.enable("trust proxy");
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+routes.forEach((r) => {
+  app.get(`${r}`, (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
+  });
 });
 
 const PORT = process.env.PORT || 4000;

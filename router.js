@@ -1,2 +1,2 @@
-const routes = ["", "ChatRoom", "GuestForm", "HostForm"];
+const routes = ["/", "/GuestForm", "/HostForm", "/ChatRoom"];
 module.exports = routes;

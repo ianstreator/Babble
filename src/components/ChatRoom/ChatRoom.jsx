@@ -19,6 +19,7 @@ function ChatRoom() {
   messagesRef.current = messages;
   const usersRef = useRef(users);
   usersRef.current = users;
+  if (!socket) window.location.href = "/";
 
   const sendStyle = {
     backgroundColor: "#5D86F0",
