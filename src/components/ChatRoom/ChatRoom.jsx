@@ -14,7 +14,7 @@ function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [limiter, setLimiter] = useState(false);
-  const { socket, language } = useContext(SocketContext);
+  const { socket, language, username } = useContext(SocketContext);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
   const usersRef = useRef(users);
@@ -56,7 +56,7 @@ function ChatRoom() {
     socket.on(`${language}`, (data) => {
       console.log(messagesRef);
       const [socketMessage, id] = data;
-      const style = id === socket.id ? "send" : "recieve";
+      const style = id === username ? "send" : "recieve";
       const newMessage = {
         message: socketMessage,
         key: messagesRef.current.length + 1,

@@ -26,7 +26,7 @@ const translate = new Translate({
   projectId: CREDENTIALS.project_id,
 });
 
-async function translateText(text, target) {
+async function translateText(text = "", target = "") {
   let [translations] = await translate.translate(text, target);
   translations = Array.isArray(translations) ? translations : [translations];
   console.log("Translations:");
@@ -70,7 +70,8 @@ function joinRoom(guest, language, roomID, socket) {
       room.languages.push(language);
     }
   } else {
-    return socket.emit("validate", false);
+    socket.emit("validate", false);
+    socket.disconnect();
   }
 }
 class Room {
@@ -109,10 +110,10 @@ io.on("connection", async (socket) => {
       }
       rooms[RoomID].languages.forEach(async (l) => {
         if (language === l) {
-          io.to(RoomID).emit(`${l}`, [data, socket.id]);
+          io.to(RoomID).emit(`${l}`, [data, username]);
         } else {
           const transText = await translateText(data, l);
-          io.to(RoomID).emit(`${l}`, [`${transText}`, socket.id]);
+          io.to(RoomID).emit(`${l}`, [`${transText}`, username]);
         }
       });
     });
@@ -143,7 +144,6 @@ io.on("connection", async (socket) => {
       }
       const newUsers = Object.keys(rooms[RoomID].users);
       io.to(RoomID).emit("user-leaving", [username, newUsers]);
-
     });
   }
 });

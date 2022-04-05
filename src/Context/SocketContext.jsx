@@ -6,7 +6,7 @@ const SocketContext = createContext();
 export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [language, setLanguage] = useState("");
-  const [languageOption, setLanguageOption] = useState([]);
+  const [username, setUsername] = useState("");
   const languageList = {
     Afrikaans: "af",
     Albanian: "sq",
@@ -124,6 +124,7 @@ export const SocketProvider = ({ children }) => {
 
   const hostSocket = (username, language, capacity, role) => {
     setLanguage(language);
+    setUsername(username);
     const host = io(undefined, {
       query: { username, language, capacity, role },
     });
@@ -132,7 +133,7 @@ export const SocketProvider = ({ children }) => {
 
   const guestSocket = (username, language, roomID, role) => {
     setLanguage(language);
-
+    setUsername(username);
     const guest = io(undefined, {
       query: { username, language, roomID, role },
     });
@@ -146,6 +147,7 @@ export const SocketProvider = ({ children }) => {
         deviceLanguageValue,
         languageList,
         language,
+        username,
         socket,
         hostSocket,
         guestSocket,
