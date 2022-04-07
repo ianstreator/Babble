@@ -21,7 +21,7 @@ function App() {
               path="/"
               element={
                 <div className="form">
-                  <img src={images.Logo} className="Logo" />
+                  <img src={require(images.Logo)} className="Logo" />
                   <RoleSelection />
                   <Footer />
                 </div>
@@ -31,7 +31,7 @@ function App() {
               path="/GuestForm"
               element={
                 <div className="form">
-                  <img src={images.Logo} className="Logo" />
+                  <img src={require(images.Logo)} className="Logo" />
                   <Toast />
                   <GuestForm />
                   <Footer />
@@ -42,7 +42,7 @@ function App() {
               path="/HostForm"
               element={
                 <div className="form">
-                  <img src={images.Logo} className="Logo" />
+                  <img src={require(images.Logo)} className="Logo" />
                   <Toast />
                   <HostForm />
                   <Footer />
