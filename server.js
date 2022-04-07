@@ -88,10 +88,11 @@ const rooms = {};
 io.on("connection", async (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
   const RoomID = roomID || genRoomID();
+  console.log(RoomID)
   if (!rooms[RoomID] && role === "guest") return socket.emit("validate", false);
   (await role) === "host"
     ? createRoom(username, language, capacity, socket, RoomID)
-    : joinRoom(username, language, roomID, socket);
+    : joinRoom(username, language, RoomID, socket);
   console.log(rooms);
   if (rooms[RoomID]) {
     let users = Object.keys(rooms[RoomID].users);
@@ -119,6 +120,7 @@ io.on("connection", async (socket) => {
     });
 
     socket.on("disconnect", (data) => {
+      socket.disconnect();
       const room = rooms[RoomID];
       const users = room.users;
       const langIndex = rooms[RoomID].languages.findIndex(
@@ -128,7 +130,7 @@ io.on("connection", async (socket) => {
       if (!Object.values(users).find((l) => l === language))
         rooms[RoomID].languages.splice(langIndex, 1);
 
-      console.log(`User : [${username}] *has left* Room : [${roomID}]`);
+      console.log(`User : [${username}] *has left* Room : [${RoomID}]`);
       console.log(room);
       if (room.host === username) {
         if (!Object.keys(users)[0]) {
