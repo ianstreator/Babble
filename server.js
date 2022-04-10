@@ -70,7 +70,14 @@ function joinRoom(guest, language, roomID, socket) {
       room.languages.push(language);
     }
   } else {
-    socket.emit("validate", false);
+    if (!capacity)
+      socket.emit("validate", "This room is currently at capacity.");
+    if (nameTaken)
+      socket.emit(
+        "validate",
+        "That username is already in use within this room."
+      );
+    // if (!room) socket.emit("validate", "That room key does not exist");
     socket.disconnect();
   }
 }
@@ -88,8 +95,8 @@ const rooms = {};
 io.on("connection", async (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
   const RoomID = roomID || genRoomID();
-  console.log(RoomID)
-  if (!rooms[RoomID] && role === "guest") return socket.emit("validate", false);
+  console.log(RoomID);
+  if (!rooms[RoomID] && role === "guest") return socket.emit("validate", "That room key does not exist");
   (await role) === "host"
     ? createRoom(username, language, capacity, socket, RoomID)
     : joinRoom(username, language, RoomID, socket);

@@ -5,7 +5,6 @@ import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
 
 function RoleSelection() {
-
   let navigate = useNavigate();
 
   function displayGuest() {

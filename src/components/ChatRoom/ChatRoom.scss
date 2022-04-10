@@ -120,34 +120,29 @@ header {
   }
 }
 
-.message-bubble-send {
+.message-bubble {
   background-color: hsla(170, 50%, 40%, 0.5);
   padding: 1rem;
   margin: 0.5rem;
-  margin-left: auto;
   border-radius: 5px;
   width: fit-content;
   max-width: 60%;
   word-wrap: break-word;
   font-size: 20px;
-  box-shadow: 0px 4px 2px -0.5px rgb(34, 34, 34);
+  box-shadow: 0px 4px 2px -0.5px rgba(0, 0, 0, 0.25);
   transition: 1s;
-  right: 0;
+  &.send {
+    background-color: hsla(170, 50%, 40%, 0.5);
+    right: 0;
+    margin-left: auto;
+  }
+  &.recieve {
+    background-color: hsla(29, 50%, 40%, 0.5);
+    left: 0;
+    margin-right: auto;
+  }
 }
-.message-bubble-recieve {
-  background-color: hsla(29, 50%, 40%, 0.5);
-  padding: 1rem;
-  margin: 0.5rem;
-  margin-right: auto;
-  border-radius: 5px;
-  width: fit-content;
-  max-width: 60%;
-  word-wrap: break-word;
-  font-size: 20px;
-  box-shadow: 0px 4px 2px -0.5px rgb(34, 34, 34);
-  transition: 1s;
-  left: 0;
-}
+
 
 @media screen and (max-width: 600px) and (max-height: 900px) {
   header {
