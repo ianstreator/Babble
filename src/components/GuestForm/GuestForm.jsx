@@ -4,7 +4,7 @@ import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import SocketContext from "../../Context/SocketContext";
 
@@ -13,11 +13,6 @@ function Guest() {
   const [roomID, setRoomID] = useState("");
   const [language, setLanguage] = useState(null);
   const [join, setJoin] = useState(false);
-  const [failure, setFailure] = useState(
-    "There seems to be an unknown issue, could not send detailed error."
-  );
-  const failureRef = useRef(failure);
-  failureRef.current = failure;
   const {
     guestSocket,
     socket,
@@ -32,29 +27,17 @@ function Guest() {
   };
 
   const connectToRoom = () => {
-    const promise = new Promise((res, rej) => {
-      socket.on("validate", (data) => {
-        if (data === true) {
-          res(navigate("/ChatRoom"));
-        } else {
-          setFailure(data);
-          rej();
-        }
-      });
+    socket.on("validate", (data) => {
+      data === true ? navigate("/ChatRoom") : toast.error(data);
     });
-    console.log(failure);
-    console.log(failureRef.current);
-
-    return promise;
+    return null;
   };
-  if (join) {
-    toast.promise(connectToRoom, {
-      success: "you're connected to the room!",
-      error: `${failure}`,
-    });
-    console.log(failure);
-    console.log(failureRef.current);
 
+  if (join) {
+    const connecting = async () => {
+      await connectToRoom();
+    };
+    connecting();
     setTimeout(() => {
       setJoin(false);
     }, 7500);
