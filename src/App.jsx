@@ -1,7 +1,7 @@
 import "./App.css";
 import images from "./images/export";
 
-import { Route, Routes, BrowserRouter as Router, Link } from "react-router-dom";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 
 import RoleSelection from "./components/Role-selection/Role-selection";
 import GuestForm from "./components/GuestForm/GuestForm";

@@ -106,7 +106,7 @@ function ChatRoom() {
 
       <div className="chat-room-container">
         <div className="message-container" id="chat">
-          <Card
+          {/* <Card
             className={`message-bubble send`}
             children={"hello"}
             key={1}
@@ -115,8 +115,8 @@ function ChatRoom() {
             className={`message-bubble recieve`}
             children={"hello"}
             key={1}
-          />
-          {/* {messagesRef.current.map((m) => {
+          /> */}
+          {messagesRef.current.map((m) => {
             return (
               <Card
                 className={`message-bubble-${m.style}`}
@@ -124,7 +124,7 @@ function ChatRoom() {
                 key={m.key}
               />
             );
-          })} */}
+          })}
         </div>
         <div className="message-input-container">
           <Input
