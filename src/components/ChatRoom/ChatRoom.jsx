@@ -27,11 +27,15 @@ function ChatRoom() {
   };
   const sendMessage = () => {
     if (limiter)
-      return toast.info("you may only send a message every two seconds");
+      return toast.info("you may only send a message every two seconds..");
+
     if (message === "") return;
     socket.emit("sender", message);
+
     setMessage("");
+
     setLimiter(true);
+
     setTimeout(() => {
       setLimiter(false);
     }, 2000);
@@ -54,27 +58,36 @@ function ChatRoom() {
       RoomKey.value = inviteID;
       setUsers([...chatters]);
     });
+
     socket.on(`${language}`, (data) => {
       const [socketMessage, id] = data;
       const style = id === username ? "send" : "recieve";
       const newMessage = {
-        name: id !== username ? id : null,
+        name: id !== username ? id : "",
         message: socketMessage,
         key: messagesRef.current.length + 1,
         style: style,
       };
       setMessages((messages) => [...messages, newMessage]);
+
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
     });
 
-    socket.on("server spam alert", (data) =>
+    socket.on("server spam alert", () =>
       toast.info("you may only send a message every two seconds")
     );
 
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
-      toast(`${username} has left the room.`);
+      // toast(`${username} has left the room.`);
+      const messageBox = document.getElementById("chat")
+      const leavingMessage = document.createElement("p")
+      leavingMessage.id = "author"
+      leavingMessage.innerText = `[ ${username} ] has left the room...`
+      messageBox.append(leavingMessage)
+      const messageContainer = document.getElementById("chat");
+      messageContainer.scrollTop = messageContainer.scrollHeight;
       setUsers([...chatters]);
     });
   }, [socket]);
@@ -107,13 +120,6 @@ function ChatRoom() {
 
       <div className="chat-room-container">
         <div className="message-container" id="chat">
-          {/* <Card className={`message-bubble send`} children={"hello"} key={1} />
-          <p id="author">Luci</p>
-          <Card
-            className={`message-bubble recieve`}
-            children={"Hello"}
-            key={2}
-          /> */}
           {messagesRef.current.map((m) => {
             return (
               <>

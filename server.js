@@ -64,11 +64,8 @@ function joinRoom(guest, language, roomID, socket) {
     socket.emit("validate", true);
     room.users[guest] = language;
     console.log(`User : [${guest}] *has joined* Room : [${roomID}]`);
-    if (room.languages.some((l) => l === language)) {
-      return;
-    } else {
+    if (!room.languages.some((l) => l === language))
       room.languages.push(language);
-    }
   } else {
     if (!capacity)
       socket.emit("validate", "This room is currently at capacity.");
@@ -106,7 +103,7 @@ io.on("connection", async (socket) => {
     let users = Object.keys(rooms[RoomID].users);
     setTimeout(() => {
       io.to(RoomID).emit("joined", [RoomID, users]);
-    }, 200);
+    }, 250);
 
     const messageLimiter = [];
     socket.on("sender", async (data) => {
@@ -117,20 +114,24 @@ io.on("connection", async (socket) => {
         socket.emit("server spam alert", true);
         return;
       }
-      let user = username;
+      let user = `[ ${username} ]`;
       rooms[RoomID].filter.unshift(username);
       rooms[RoomID].filter.splice(2, 1);
       console.log(rooms[RoomID].filter);
-      if (rooms[RoomID].filter[0] === rooms[RoomID].filter[1]) {
-        user = null;
+      console.log(Object.keys(rooms[RoomID].users));
+      if (
+        rooms[RoomID].filter[0] === rooms[RoomID].filter[1] ||
+        Object.keys(rooms[RoomID].users).length < 3
+      ) {
+        user = "";
       }
       rooms[RoomID].languages.forEach(async (l) => {
-        socket.emit(`${l}`, [data, username])
+        socket.emit(`${l}`, [data, username]);
         if (language === l) {
-          socket.broadcast.to(RoomID).emit(`${l}`, [data, `[ ${user} ]`]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [data, user]);
         } else {
           const transText = await translateText(data, l);
-          socket.broadcast.to(RoomID).emit(`${l}`, [`${transText}`, `[ ${user} ]`]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [`${transText}`, user]);
         }
       });
     });

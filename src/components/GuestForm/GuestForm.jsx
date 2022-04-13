@@ -30,26 +30,25 @@ function Guest() {
     socket.on("validate", (data) => {
       data === true ? navigate("/ChatRoom") : toast.error(data);
     });
-    return null;
   };
 
   if (join) {
-    const connecting = async () => {
-      await connectToRoom();
-    };
-    connecting();
+    connectToRoom();
+
     setTimeout(() => {
       setJoin(false);
     }, 7500);
   }
 
-  const navJoin = () => {
+  const navJoin = async () => {
     if (join)
       return toast("please wait before attempting to join a room again..");
     if (username === "" || roomID === "" || language === null) {
       return toast("Please fill out all fields");
     }
+
     guestSocket(username, language, roomID, "guest");
+
     setJoin(true);
   };
 
