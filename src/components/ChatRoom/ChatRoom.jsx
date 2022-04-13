@@ -21,7 +21,7 @@ function ChatRoom() {
   usersRef.current = users;
   if (!socket) window.location.href = "/";
 
-  const sendStyle = {
+  const sendButtonStyle = {
     backgroundColor: "#5D86F0",
     color: "white",
   };
@@ -55,10 +55,10 @@ function ChatRoom() {
       setUsers([...chatters]);
     });
     socket.on(`${language}`, (data) => {
-      console.log(messagesRef);
       const [socketMessage, id] = data;
       const style = id === username ? "send" : "recieve";
       const newMessage = {
+        name: id !== username ? id : null,
         message: socketMessage,
         key: messagesRef.current.length + 1,
         style: style,
@@ -67,6 +67,7 @@ function ChatRoom() {
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
     });
+
     socket.on("server spam alert", (data) =>
       toast.info("you may only send a message every two seconds")
     );
@@ -106,23 +107,23 @@ function ChatRoom() {
 
       <div className="chat-room-container">
         <div className="message-container" id="chat">
-          {/* <Card
-            className={`message-bubble send`}
-            children={"hello"}
-            key={1}
-          />
+          {/* <Card className={`message-bubble send`} children={"hello"} key={1} />
+          <p id="author">Luci</p>
           <Card
             className={`message-bubble recieve`}
-            children={"hello"}
-            key={1}
+            children={"Hello"}
+            key={2}
           /> */}
           {messagesRef.current.map((m) => {
             return (
-              <Card
-                className={`message-bubble-${m.style}`}
-                children={m.message}
-                key={m.key}
-              />
+              <>
+                <p id="author">[ {m.name} ]</p>
+                <Card
+                  className={`message-bubble ${m.style}`}
+                  children={m.message}
+                  key={m.key}
+                />
+              </>
             );
           })}
         </div>
@@ -141,7 +142,7 @@ function ChatRoom() {
             className={"send-button"}
             children={"Send"}
             onClick={sendMessage}
-            style={message === "" ? null : sendStyle}
+            style={message === "" ? null : sendButtonStyle}
           />
         </div>
       </div>

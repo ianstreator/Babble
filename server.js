@@ -46,7 +46,7 @@ function genRoomID() {
   return S4() + S4() + "-" + S4();
 }
 function createRoom(host, language, capacity, socket, roomID) {
-  const room = new Room(host, capacity, {}, [language]);
+  const room = new Room(host, capacity, {}, [language], []);
   room.users[host] = language;
   socket.join(roomID);
   rooms[roomID] = room;
@@ -77,16 +77,16 @@ function joinRoom(guest, language, roomID, socket) {
         "validate",
         "That username is already in use within this room."
       );
-    // if (!room) socket.emit("validate", "That room key does not exist");
     socket.disconnect();
   }
 }
 class Room {
-  constructor(host, capacity, users, languages) {
+  constructor(host, capacity, users, languages, filter) {
     (this.host = host),
       (this.capacity = capacity),
       (this.users = users),
-      (this.languages = languages);
+      (this.languages = languages),
+      (this.filter = filter);
   }
 }
 
@@ -96,7 +96,8 @@ io.on("connection", async (socket) => {
   const { username, language, capacity, roomID, role } = socket.handshake.query;
   const RoomID = roomID || genRoomID();
   console.log(RoomID);
-  if (!rooms[RoomID] && role === "guest") return socket.emit("validate", "That room key does not exist");
+  if (!rooms[RoomID] && role === "guest")
+    return socket.emit("validate", "That room key does not exist");
   (await role) === "host"
     ? createRoom(username, language, capacity, socket, RoomID)
     : joinRoom(username, language, RoomID, socket);
@@ -116,12 +117,20 @@ io.on("connection", async (socket) => {
         socket.emit("server spam alert", true);
         return;
       }
+      let user = username;
+      rooms[RoomID].filter.unshift(username);
+      rooms[RoomID].filter.splice(2, 1);
+      console.log(rooms[RoomID].filter);
+      if (rooms[RoomID].filter[0] === rooms[RoomID].filter[1]) {
+        user = null;
+      }
       rooms[RoomID].languages.forEach(async (l) => {
+        socket.emit(`${l}`, [data, username])
         if (language === l) {
-          io.to(RoomID).emit(`${l}`, [data, username]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [data, user]);
         } else {
           const transText = await translateText(data, l);
-          io.to(RoomID).emit(`${l}`, [`${transText}`, username]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [`${transText}`, user]);
         }
       });
     });
