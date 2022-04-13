@@ -117,7 +117,7 @@ function ChatRoom() {
           {messagesRef.current.map((m) => {
             return (
               <>
-                <p id="author">[ {m.name} ]</p>
+                <p id="author">{m.name}</p>
                 <Card
                   className={`message-bubble ${m.style}`}
                   children={m.message}

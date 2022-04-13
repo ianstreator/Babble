@@ -127,10 +127,10 @@ io.on("connection", async (socket) => {
       rooms[RoomID].languages.forEach(async (l) => {
         socket.emit(`${l}`, [data, username])
         if (language === l) {
-          socket.broadcast.to(RoomID).emit(`${l}`, [data, user]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [data, `[ ${user} ]`]);
         } else {
           const transText = await translateText(data, l);
-          socket.broadcast.to(RoomID).emit(`${l}`, [`${transText}`, user]);
+          socket.broadcast.to(RoomID).emit(`${l}`, [`${transText}`, `[ ${user} ]`]);
         }
       });
     });
