@@ -26,14 +26,10 @@ function Guest() {
     navigate("/");
   };
 
-  const connectToRoom = () => {
+  if (join) {
     socket.on("validate", (data) => {
       data === true ? navigate("/ChatRoom") : toast.error(data);
     });
-  };
-
-  if (join) {
-    connectToRoom();
 
     setTimeout(() => {
       setJoin(false);
@@ -43,6 +39,7 @@ function Guest() {
   const navJoin = async () => {
     if (join)
       return toast("please wait before attempting to join a room again..");
+
     if (username === "" || roomID === "" || language === null) {
       return toast("Please fill out all fields");
     }

@@ -81,11 +81,11 @@ function ChatRoom() {
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
       // toast(`${username} has left the room.`);
-      const messageBox = document.getElementById("chat")
-      const leavingMessage = document.createElement("p")
-      leavingMessage.id = "author"
-      leavingMessage.innerText = `[ ${username} ] has left the room...`
-      messageBox.append(leavingMessage)
+      const messageBox = document.getElementById("chat");
+      const leavingMessage = document.createElement("p");
+      leavingMessage.id = "author";
+      leavingMessage.innerText = `[ ${username} ] has left the room...`;
+      messageBox.append(leavingMessage);
       const messageContainer = document.getElementById("chat");
       messageContainer.scrollTop = messageContainer.scrollHeight;
       setUsers([...chatters]);
