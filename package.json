@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "devStart": "nodemon server.js",
     "start": "node server.js",
-    "dev": "vite",
+    "dev:client": "vite",
+    "dev:server": "nodemon server.js",
     "build": "vite build",
     "preview": "vite preview"
   },

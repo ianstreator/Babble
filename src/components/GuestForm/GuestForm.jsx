@@ -4,15 +4,11 @@ import Form from "../shared/Form";
 import Input from "../shared/Input";
 import Button from "../shared/Button";
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import SocketContext from "../../Context/SocketContext";
 
 function Guest() {
-  const [username, setUsername] = useState("");
-  const [roomID, setRoomID] = useState("");
-  const [language, setLanguage] = useState(null);
-  const [join, setJoin] = useState(false);
   const {
     guestSocket,
     socket,
@@ -20,8 +16,14 @@ function Guest() {
     deviceLanguage,
     deviceLanguageValue,
   } = useContext(SocketContext);
-  let navigate = useNavigate();
 
+  const [username, setUsername] = useState("");
+  const [roomID, setRoomID] = useState("");
+  const [join, setJoin] = useState(false);
+  const [language, setLanguage] = useState(deviceLanguageValue);
+
+  let navigate = useNavigate();
+  
   const navBack = () => {
     navigate("/");
   };
@@ -68,9 +70,9 @@ function Guest() {
             />
 
             <select onChange={(e) => setLanguage(e.target.value)}>
-              <option value={null} className="place-holder">
+              {/* <option value={null} className="place-holder">
                 Please choose a language
-              </option>
+              </option> */}
               <option value={deviceLanguageValue}>
                 - Device language ({deviceLanguage}) -
               </option>

@@ -1,7 +1,7 @@
 import "./HostForm.css";
 
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import SocketContext from "../../Context/SocketContext";
 
 import Form from "../shared/Form";
@@ -10,12 +10,14 @@ import Button from "../shared/Button";
 import { toast } from "react-toastify";
 
 function HostForm() {
-  let navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [language, setLanguage] = useState(null);
-  const [capacity, setCapacity] = useState(2);
   const { hostSocket, languageList, deviceLanguage, deviceLanguageValue } =
     useContext(SocketContext);
+    
+  const [username, setUsername] = useState("");
+  const [capacity, setCapacity] = useState(2);
+  const [language, setLanguage] = useState(deviceLanguageValue);
+
+  let navigate = useNavigate();
 
   const navBack = () => {
     navigate("/");
@@ -43,9 +45,6 @@ function HostForm() {
               maxLength={7}
             />
             <select onChange={(e) => setLanguage(e.target.value)}>
-              <option value={null} className="place-holder">
-                Please choose a language
-              </option>
               <option value={deviceLanguageValue}>
                 - Device language ({deviceLanguage}) -
               </option>

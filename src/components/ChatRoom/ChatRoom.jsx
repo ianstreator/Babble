@@ -126,7 +126,7 @@ function ChatRoom() {
                 <p id="author">{m.name}</p>
                 <Card
                   className={`message-bubble ${m.style}`}
-                  children={m.message}
+                  children={[m.message, <div id="color"></div>]}
                   key={m.key}
                 />
               </>
