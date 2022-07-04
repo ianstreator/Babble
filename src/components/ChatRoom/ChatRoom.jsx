@@ -19,12 +19,23 @@ function ChatRoom() {
   messagesRef.current = messages;
   const usersRef = useRef(users);
   usersRef.current = users;
-  if (!socket) window.location.href = "/";
+  const leaveRoom = () => {
+    window.location.href = "/";
+  };
+  if (!socket) leaveRoom();
+  
+  const copyRoomKey = () => {
+    const key = document.getElementById("Room-Key");
+    if (!key.value) return;
+    navigator.clipboard.writeText(key.value);
+    toast.success("room key copied");
+  };
 
   const sendButtonStyle = {
     backgroundColor: "#5D86F0",
     color: "white",
   };
+
   const sendMessage = () => {
     if (limiter)
       return toast.info("you may only send a message every two seconds..");
@@ -39,16 +50,6 @@ function ChatRoom() {
     setTimeout(() => {
       setLimiter(false);
     }, 2000);
-  };
-
-  const copyRoomKey = () => {
-    const key = document.getElementById("Room-Key");
-    if (!key.value) return;
-    navigator.clipboard.writeText(key.value);
-    toast.success("room key copied");
-  };
-  const leaveRoom = () => {
-    window.location.href = "/";
   };
 
   useEffect(() => {
@@ -80,7 +81,6 @@ function ChatRoom() {
 
     socket.on("user-leaving", (data) => {
       const [username, chatters] = data;
-      // toast(`${username} has left the room.`);
       const messageBox = document.getElementById("chat");
       const leavingMessage = document.createElement("p");
       leavingMessage.id = "author";

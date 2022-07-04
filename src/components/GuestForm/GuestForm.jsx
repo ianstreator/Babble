@@ -70,9 +70,6 @@ function Guest() {
             />
 
             <select onChange={(e) => setLanguage(e.target.value)}>
-              {/* <option value={null} className="place-holder">
-                Please choose a language
-              </option> */}
               <option value={deviceLanguageValue}>
                 - Device language ({deviceLanguage}) -
               </option>

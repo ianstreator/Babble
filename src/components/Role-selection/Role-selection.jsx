@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 function RoleSelection() {
   let navigate = useNavigate();
 
-  function displayGuest() {
+  function displayGuestForm() {
     navigate("/GuestForm");
   }
-  function displayHost() {
+  function displayHostForm() {
     navigate("/HostForm");
   }
 
@@ -20,14 +20,14 @@ function RoleSelection() {
         className={"btn host"}
         type={"button"}
         children={<h1>Host</h1>}
-        onClick={displayHost}
+        onClick={displayHostForm}
       />
 
       <Button
         className={"btn guest"}
         type={"button"}
         children={<h1>Guest</h1>}
-        onClick={displayGuest}
+        onClick={displayGuestForm}
       />
     </div>
   );

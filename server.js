@@ -136,7 +136,7 @@ io.on("connection", async (socket) => {
       });
     });
 
-    socket.on("disconnect", (data) => {
+    socket.on("disconnect", () => {
       socket.disconnect();
       const room = rooms[RoomID];
       const users = room.users;
